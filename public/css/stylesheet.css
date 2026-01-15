@@ -119,3 +119,152 @@ body {
 .navbar-toggler-icon {
   filter: invert(62%) sepia(94%) saturate(451%) hue-rotate(106deg) brightness(101%) contrast(101%);
 }
+
+/* =========== LoginPage ============== */
+/* Login Container - Centering the form */
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    padding: 20px;
+}
+
+.login-card {
+    background: rgba(18, 18, 20, 0.8);
+    border: 1px solid rgba(0, 255, 157, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.signin-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    padding: 20px;
+}
+
+.signin-card {
+    background: rgba(18, 18, 20, 0.8);
+    border: 1px solid rgba(0, 255, 157, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Styling Twig Form Rows */
+.mb-3, .form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: #00ff9d;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+/* The Inputs  */
+input[type="text"], 
+input[type="password"], 
+input[type="email"], 
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #00ff9d;
+    background: rgba(0, 255, 157, 0.05);
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.1);
+}
+
+/* Button Integration */
+.login-card button[type="submit"] {
+    width: 100%;
+    margin-top: 10px;
+    background: #00ff9d;
+    color: #0a0a0c;
+    border: none;
+    padding: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.login-card button[type="submit"]:hover {
+    background: #00cc7e;
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+    transform: translateY(-2px);
+}
+
+.login-title {
+font-family: 'JetBrains Mono';
+ margin-bottom: 30px;
+  text-align: center;
+overflow: hidden;
+color: #fff;
+}
+
+.signin-card button[type="submit"] {
+    width: 100%;
+    margin-top: 10px;
+    background: #00ff9d;
+    color: #0a0a0c;
+    border: none;
+    padding: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.signin-card button[type="submit"]:hover {
+    background: #00cc7e;
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+    transform: translateY(-2px);
+}
+
+.signin-title {
+font-family: 'JetBrains Mono';
+ margin-bottom: 30px;
+  text-align: center;
+overflow: hidden;
+color: #fff;
+}
+
+.sign-up-text {
+    overflow: hidden;
+    margin-top: 2rem;
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: #00ff9d;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    text-decoration: none;   
+}

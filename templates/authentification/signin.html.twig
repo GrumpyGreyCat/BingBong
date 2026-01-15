@@ -1,3 +1,37 @@
 {% extends "base.html.twig" %}
 
+
+{% block body %}
 {% block navbar %}{{ parent() }}{% endblock %}
+
+<div class="signin-wrapper">
+    <div class="signin-card">
+        <h2 class="signin-title">
+            <span style="color: #00ff9d;">&gt;</span> AUTH_REQUIRED
+        </h2>
+
+        {{ form_start(signinForm) }}
+            <div class="mb-3">
+                {{ form_label(signinForm.email, 'Your Email') }}
+                {{ form_widget(signinForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email...'}}) }}
+            </div>
+            
+            <div class="mb-3">
+                {{ form_label(signinForm.username, 'Your Username') }}
+                {{ form_widget(signinForm.username, {'attr': {'class': 'form-control', 'placeholder': 'Username...'}}) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(signinForm.password, 'Your Password') }}
+                {{ form_widget(signinForm.password, {'attr': {'class': 'form-control', 'placeholder': '••••••••'}}) }}
+            </div>
+
+            
+
+            <button type="submit" class="ctf-btn">
+                Initialize Session
+            </button>
+        {{ form_end(signinForm) }}
+    </div>
+</div>
+{% endblock %}
