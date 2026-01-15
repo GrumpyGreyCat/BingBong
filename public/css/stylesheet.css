@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
+/* ================= * ==================== */
+/* Global Reset */
+* {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box ;
+    font-family: "DM Mono";
+}
+
+/* Body & Background Layout */
+body {  
+  background-color: #0a0a0c;
+  background-image: 
+    linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, #161b22 0%, #0a0a0c 100%);
+  background-size: 30px 30px, 30px 30px, 100% 100%;
+  
+  line-height: 1.6;
+}
+
+/* Selection Color */
+::selection {
+  background: rgba(0, 255, 157, 0.3);
+  color: #ffffff;
+}
+
+/* ============= Main Page =================== */
+/* Menu button */
+
+.button-container {
+    margin-top: 15rem;
+}
+
+.level-selection {
+    /* Layout & Typography */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    /* Colors & Border */
+    color: #00ff9d;
+    background: #121212;
+    border: 1px solid rgba(0, 255, 157, 0.3);
+    border-radius: 4px;
+
+    /* The "Smooth" factor */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.level-selection:hover {
+  color: #121212;
+  background: #00ff9d;
+  border-color: #00ff9d;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.4);
+}
+
+/* Custom CTF Navbar */
+.ctf-navbar {
+  background: rgba(10, 10, 12, 0.8) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+  padding: 15px 0;
+  transition: all 0.3s ease;
+}
+
+/* Brand/Logo Styling */
+.navbar-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff !important;
+}
+
+.brand-accent {
+  color: #00ff9d; 
+  margin-right: 5px;
+}
+
+/* Nav Links */
+.ctf-navbar .nav-link {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7) !important;
+  margin: 0 10px;
+  transition: color 0.2s ease;
+}
+
+.ctf-navbar .nav-link:hover, 
+.ctf-navbar .nav-link.active {
+  color: #00ff9d !important;
+}
+
+/* Special styling for a 'Login' button in the nav */
+.ctf-nav-btn {
+  border: 1px solid #00ff9d;
+  border-radius: 4px;
+  padding: 6px 18px !important;
+  color: #00ff9d !important;
+  margin-left: 15px !important;
+}
+
+.ctf-nav-btn:hover {
+  background: rgba(0, 255, 157, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+}
+
+/* Mobile Toggle - Make it green */
+.navbar-toggler {
+  border: none;
+}
+.navbar-toggler-icon {
+  filter: invert(62%) sepia(94%) saturate(451%) hue-rotate(106deg) brightness(101%) contrast(101%);
+}

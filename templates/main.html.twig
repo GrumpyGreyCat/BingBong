@@ -1,7 +1,17 @@
-{% extends "navbar.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block navbar %}{{ parent() }}{% endblock %}
 
+{% block menu %}
 <section>
-    
+    <div class="container container-fluid button-container">
+        <div class="row">
+            <div class="col-12 d-grid gap-5">
+                <button class="btn w-25 mx-auto level-selection">Easy Room</button>
+                <button class="btn w-25 mx-auto level-selection">Medium Room</button>
+                <button class="btn w-25 mx-auto level-selection"> Hard Room</button>
+            </div>
+        </div>
+    </div>
 </section>
+{% endblock %}
