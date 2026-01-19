@@ -3,13 +3,13 @@
 {% block navbar %}{{ parent() }}{% endblock %}
 
 {% block menu %}
-<section>
+<section class="menu">
     <div class="container container-fluid button-container">
         <div class="row">
             <div class="col-12 d-grid gap-5">
-                <button class="btn w-25 mx-auto level-selection">Easy Room</button>
-                <button class="btn w-25 mx-auto level-selection">Medium Room</button>
-                <button class="btn w-25 mx-auto level-selection"> Hard Room</button>
+                <a href="{{ path('easy') }}" class="link"><button class="btn w-25 mx-auto level-selection">Easy Rooms</button>
+                <a href="{{ path('medium') }}" class="link"><button class="btn w-25 mx-auto level-selection">Medium Rooms</button>
+                <a href="{{ path('hard') }}" class="link"><button class="btn w-25 mx-auto level-selection"> Hard Rooms</button>
             </div>
         </div>
     </div>
