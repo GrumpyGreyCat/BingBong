@@ -1,0 +1,10 @@
+services:
+  database:
+    image: postgres:16-alpine
+    environment:
+      # Use ${VARIABLE_NAME} to pull from your .env file
+      POSTGRES_DB: ${POSTGRES_DB:-app_db}
+      POSTGRES_USER: ${POSTGRES_USER:-symfony_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password123}
+    ports:
+      - "5432:5432"
