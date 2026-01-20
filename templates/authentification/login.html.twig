@@ -10,21 +10,27 @@
             <span style="color: #00ff9d;">&gt;</span> AUTH_REQUIRED
         </h2>
 
-        {{ form_start(loginForm) }}
+
+        {% if error %}
+            <div class="alert alert-danger" role="alert">{{ error.messageKey }}</div>
+        {% endif %}
+        
+        <form method="post">
             <div class="mb-3">
-                {{ form_label(loginForm.login, 'Operator ID') }}
-                {{ form_widget(loginForm.login, {'attr': {'class': 'form-control', 'placeholder': 'username...'}}) }}
-            </div>
-            
-            <div class="mb-3">
-                {{ form_label(loginForm.password, 'Access Key') }}
-                {{ form_widget(loginForm.password, {'attr': {'class': 'form-control', 'placeholder': '••••••••'}}) }}
+                <label for="username">Operator ID</label>
+                <input type="text" id="username" name="_username" class="form-control" placeholder="username..." required>
             </div>
 
-            <button type="submit" class="ctf-btn">
+            <div class="mb-3">
+                <label for="password">Access Key</label>
+                <input type="password" id="password" name="_password" class="form-control" placeholder="••••••••" required>
+            </div>
+
+             <button type="submit" class="ctf-btn">
                 Initialize Session
             </button>
-        {{ form_end(loginForm) }}
+        </form>
+
         <h4 class="sign-up-text">
             Don't have an account ? <a href="{{ path('signin') }}">Sign Up Here</a>
         </h4>
