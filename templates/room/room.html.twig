@@ -8,7 +8,7 @@
 
 {% block body %}
 {% block navbar %}{{ parent() }}{% endblock %}
-<div class="room-container theme-{{ difficulty }}">
+<div class="room-container">
     <header class="room-header">
         <span class="badge">{{ difficulty|upper }} MODE</span>
         <h1>ROOM_{{ room_id|format('%02d') }}</h1>

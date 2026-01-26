@@ -1,23 +1,37 @@
-{% extends "base.html.twig" %}
 
-{% block body %}
-{% block navbar %}{{ parent() }}{% endblock %}
-
-<section>
-<div class="level-selector-page">
-    <header class="level-header">
-        <h1>{{ difficulty|upper }}_ROOMS</h1>
-    </header>
-
-    <div class="room-grid grid">
-    {% for room in 1..19 %}
-        <a href="{{ path('room', {'difficulty': difficulty, 'room': room}) }}" class="room-btn">
-            <span class="room-num">{{ room|format('%02d') }}</span>
-            <span class="room-meta">ACTIVE</span>
-        </a>
-    {% endfor %}
-</div>
+<div class="mock-challenge">
+    <section class="mb-5">
+        <h3 class="text-white"><span class="text-success">#</span> MISSION_LOG</h3>
+        <p>A rogue operative has left a trace in the `/var/logs/auth.log`. Your objective is to recover the string hidden within the localized buffer. The flag follows the standard format: <code>FLAG{...}</code>.</p>
         
+        <div class="terminal-box my-4">
+            <div class="terminal-header">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="terminal-title">bash — 80x24</span>
+            </div>
+            <div class="terminal-body">
+                <p class="mb-0"><span class="text-success">operator@ctf:~$</span> ls -la /opt/secret</p>
+                <p class="mb-0">total 8</p>
+                <p class="mb-0">-r--r--r--  1 root  root  32 Jan 26 15:14 flag.txt</p>
+                <p class="mb-0"><span class="text-success">operator@ctf:~$</span> cat flag.txt</p>
+                <p class="mb-1 text-info">SGludDogVGhlIGZsYWcgaXNuJ3QgaGVyZSwgaXQncyBpbiB0aGUgY29va2llcyE=</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="flag-section mt-5">
+        <h3 class="text-white mb-4"><span class="text-success">#</span> SUBMIT_PAYLOAD</h3>
+        
+        <form action="#" class="flag-form">
+            <div class="input-group">
+                <span class="input-group-text bg-dark border-success text-success">
+                    <i class="bi bi-terminal-fill"></i> FLAG{
+                </span>
+                <input type="text" class="form-control flag-input" placeholder="hex_string_here" aria-label="Flag content">
+                <span class="input-group-text bg-dark border-success text-success">}</span>
+                <button class="ctf-btn ms-3" type="submit">CAPTURE</button>
+            </div>
+            <small class="text-muted mt-2 d-block">System status: <span class="text-warning">Awaiting Input...</span></small>
+        </form>
+    </section>
 </div>
-</section>
-{% endblock %}
