@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+{% block navbar %}{{ parent() }}{% endblock %}
+
+<section>
+<div class="level-selector-page">
+    <header class="level-header">
+        <h1>{{ difficulty|upper }}_ROOMS</h1>
+    </header>
+
+    <div class="room-grid grid">
+    {% for room in 1..19 %}
+        <a href="{{ path('room', {'difficulty': difficulty, 'room': room}) }}" class="room-btn">
+            <span class="room-num">{{ room|format('%02d') }}</span>
+            <span class="room-meta">ACTIVE</span>
+        </a>
+    {% endfor %}
+</div>
+        
+</div>
+</section>
+{% endblock %}

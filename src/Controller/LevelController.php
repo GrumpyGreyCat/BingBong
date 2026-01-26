@@ -7,18 +7,29 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class LevelController extends AbstractController {
-    #[Route('/easy', name: 'easy')]
-    public function easy(): Response{
-        return $this->render('level/easy.html.twig');
+ 
+
+
+   #[Route('/{difficulty}', name: 'difficulty', requirements: ['difficulty' => 'easy|medium|hard'])]
+    public function roomList(string $difficulty): Response
+    {
+        return $this->render("room/grid.html.twig", [
+            'difficulty' => $difficulty,
+        ]);
     }
 
-    #[Route('/medium', name: 'medium')]
-    public function medium(): Response{
-        return $this->render('level/medium.html.twig');
-    }
+    #[Route('/{difficulty}/{room}', name: 'room', requirements: [
+    'difficulty' => 'easy|medium|hard',
+    'room' => '\d+' // This ensures 'room' must be a number
+    ])]
+    public function roomView(string $difficulty, int $room): Response
+    {
+        // In a real app, you'd fetch the specific challenge data here
+        // $challenge = $repository->findOneBy(['difficulty' => $difficulty, 'id' => $room]);
 
-    #[Route('/hard', name: 'hard')]
-    public function hard(): Response{
-        return $this->render('level/hard.html.twig');
+        return $this->render("room/room.html.twig", [
+            'difficulty' => $difficulty,
+            'room_id'    => $room,
+        ]);
     }
 }

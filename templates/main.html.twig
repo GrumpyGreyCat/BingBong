@@ -7,9 +7,9 @@
     <div class="container container-fluid button-container">
         <div class="row">
             <div class="col-12 d-grid gap-5">
-                <a href="{{ path('easy') }}" class="link"><button class="btn w-25 mx-auto level-selection">Easy Rooms</button>
-                <a href="{{ path('medium') }}" class="link"><button class="btn w-25 mx-auto level-selection">Medium Rooms</button>
-                <a href="{{ path('hard') }}" class="link"><button class="btn w-25 mx-auto level-selection"> Hard Rooms</button>
+                <a href="{{ path('difficulty', {'difficulty': 'easy'}) }}" class="link"><button class="btn w-25 mx-auto level-selection">Easy Rooms</button>
+                <a href="{{ path('difficulty', {'difficulty': 'medium'}) }}" class="link"><button class="btn w-25 mx-auto level-selection">Medium Rooms</button>
+                <a href="{{ path('difficulty', {'difficulty': 'hard'}) }}" class="link"><button class="btn w-25 mx-auto level-selection"> Hard Rooms</button>
             </div>
         </div>
     </div>

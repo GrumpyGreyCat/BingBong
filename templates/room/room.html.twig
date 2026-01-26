@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+
+
+
+{% block roomContent %}
+
+
+{% block body %}
+{% block navbar %}{{ parent() }}{% endblock %}
+<div class="room-container theme-{{ difficulty }}">
+    <header class="room-header">
+        <span class="badge">{{ difficulty|upper }} MODE</span>
+        <h1>ROOM_{{ room_id|format('%02d') }}</h1>
+    </header>
+
+    <main class="challenge-container">
+        {% set challenge_file = "room/" ~ difficulty ~ "/room" ~ room_id|format('%02d') ~ ".html.twig" %}
+        
+        <div class="puzzle-content">
+            {{ include(challenge_file, ignore_missing = true) }}
+        </div>
+    </main>
+
+    <footer class="room-actions">
+        <a href="{{ path('difficulty', {'difficulty': difficulty}) }}" class="back-btn">
+            RETURN TO GRID
+        </a>
+    </footer>
+</div>
+{% endblock %}
+{% endblock %}
