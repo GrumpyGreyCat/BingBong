@@ -705,3 +705,52 @@ color: #fff;
 .ctf-table tbody tr:hover {
     background: rgba(255, 255, 255, 0.02); /* Very subtle "lift" */
 }
+/* Container styling to match the dark grid background */
+.search-bar-container {
+    background-color: #0d0d0d;
+    padding: 20px;
+    border-bottom: 1px solid #1a1a1a;
+    margin-bottom: 2rem;
+}
+
+/* The Search Input Group */
+.search-input-group {
+    background: #000 !important;
+    border: 1px solid #1a1a1a !important; /* Subtle border like your table rows */
+    border-radius: 2px !important;
+    transition: border-color 0.3s ease;
+}
+
+.search-input-group:focus-within {
+    border-color: #00ff41 !important; /* Glows only on focus */
+}
+
+/* The "> SEARCH_QUERY:" prefix */
+.input-group-text {
+    background: transparent !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-family: 'Consolas', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+/* The Input Field */
+#terminalSearch {
+    background: transparent !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-family: 'Consolas', monospace;
+    font-size: 0.9rem;
+}
+
+#terminalSearch:focus {
+    box-shadow: none !important;
+}
+
+#terminalSearch::placeholder {
+    color: #444;
+    font-style: normal;
+}

@@ -9,6 +9,17 @@
         <h1><span class="brand-accent">&gt;</span> USER_MANIFEST</h1>
         <p class="text-secondary">Authorized personnel database access.</p>
     </header>
+
+    <nav class="search-bar-container mb-4">
+    <div class="input-group search-input-group">
+        <span class="input-group-text bg-dark text-success border-secondary">> SEARCH_QUERY:</span>
+        
+        <input type="text" 
+               id="terminalSearch" 
+               class="form-control bg-black text-success border-secondary" 
+               placeholder="Enter UID, Username, or Email...">
+    </div>
+</nav>
     
     <div class="table-responsive ctf-table-wrapper">
         <table class="table ctf-table">
@@ -21,9 +32,9 @@
                     <th class="text-end">OPERATIONS</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="userTableBody">
                 {% for user in users %}
-                    <tr>
+                    <tr class="user-row"> 
                         <td class="user-id">#{{ user.id|format('%03d') }}</td>
                         <td class="user-name">{{ user.username }}</td>
                         <td class="user-email">{{ user.email }}</td>
@@ -48,4 +59,10 @@
         </table>
     </div>
 </div>
+
+
+{% block js %}
+    {{ parent() }}
+    <script src="{{ asset('js/adminUserSearch.js') }}"></script>
+{% endblock %}
 {% endblock %}
