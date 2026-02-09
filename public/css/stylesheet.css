@@ -590,3 +590,118 @@ color: #fff;
     height: 48px;
     white-space: nowrap;
 }
+
+
+/* ======================== Admin - userPanel  ======================== */
+
+
+/* 2. Container & Header */
+.directory-container {
+    max-width: 1200px;
+    margin: 8rem auto 4rem;
+    padding: 0 2rem;
+}
+
+.directory-header {
+    text-align: center; /* Matching your centered "EASY_ROOMS" title */
+    margin-bottom: 4rem;
+}
+
+.directory-header h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.2rem;
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-transform: uppercase;
+    overflow-y: hidden;
+}
+
+.directory-header p {
+    font-family: 'JetBrains Mono', monospace;
+    color: #52525b;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+/* 3. The Seamless Table Wrapper */
+.ctf-table-wrapper {
+    background: rgba(13, 15, 18, 0.9); /* Translucent obsidian */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Very thin "pro" border */
+    border-radius: 4px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.ctf-table {
+    margin-bottom: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* 4. Unified TH & TD (No background difference) */
+.ctf-table th, 
+.ctf-table td {
+    padding: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03); /* Faint dividers */
+    background: transparent;
+    vertical-align: middle;
+}
+
+/* High Contrast Headers */
+.ctf-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Data Styling */
+.user-id {
+    font-family: 'JetBrains Mono', monospace;
+    color: #ffffff !important; 
+    font-size: 1.2rem;
+}
+
+.user-email, .user-name {
+    font-family: 'Inter', sans-serif;
+    color: #a1a1aa !important; /* Softer grey for sub-data */
+}
+
+/* 5. Status/Role Badge (The neon accent) */
+.role-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: #00ff9d; /* The green from your "ACTIVE" text */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* 6. Action Button (The "Logout" style) */
+.action-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #00ff9d;
+    text-decoration: none;
+    padding: 8px 20px;
+    border: 1px solid #00ff9d; /* Matches the green box in your nav */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.action-link:hover {
+    background: rgba(0, 255, 157, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+}
+
+/* 7. Row Hover Awakening */
+.ctf-table tbody tr {
+    transition: background 0.3s ease;
+}
+
+.ctf-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02); /* Very subtle "lift" */
+}

@@ -29,6 +29,9 @@
                     <li class="nav-item"><a class="nav-link active" href="#">Terminal</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Challenges</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Scoreboard</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item"><a class="nav-link" href="{{ path('adminUserPanel') }}">Admin Panel</a></li>
+                    {% endif %}
                     {% if app.user %}
                     <li class="nav-item"><a class="nav-link ctf-nav-btn" href="{{ path('logout') }}">logout</a></li>
                     {% else %}
@@ -41,7 +44,10 @@
         {% endblock %}
         {% block menu %}
         {% endblock %}
-        {% block roomContent %}{% endblock %}
+        {% block roomContent %}
+        {% endblock %}
+        {% block table %}
+        {% endblock %}
     {% endblock %}
     </body>
 </html>

@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+
+
+{% block body %}
+{% block navbar %}{{ parent() }}{% endblock %}
+<div class="directory-container">
+    <header class="directory-header">
+        <h1><span class="brand-accent">&gt;</span> USER_MANIFEST</h1>
+        <p class="text-secondary">Authorized personnel database access.</p>
+    </header>
+    
+    <div class="table-responsive ctf-table-wrapper">
+        <table class="table ctf-table">
+            <thead>
+                <tr>
+                    <th><span class="th-glow">UID</span></th>
+                    <th><span class="th-glow">USERNAME</span></th>
+                    <th>EMAIL</th>
+                    <th>ACCESS_LEVEL</th>
+                    <th class="text-end">OPERATIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td class="user-id">#{{ user.id|format('%03d') }}</td>
+                        <td class="user-name">{{ user.username }}</td>
+                        <td class="user-email">{{ user.email }}</td>
+                        <td>
+                            {% for role in user.roles %}
+                                <span class="role-badge">{{ role|replace({'ROLE_': ''}) }}</span>
+                            {% endfor %}
+                        </td>
+                        <td class="text-end">
+                            <a href="#" class="action-link">MODIFY</a>
+                            <a href="{{ path('delUser', {'uuidUser': user.id}) }}" class="action-link">DELETE</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center no-data">
+                            [!] NO_ENTRIES_FOUND_IN_DATABASE
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

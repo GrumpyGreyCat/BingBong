@@ -5,10 +5,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use App\Repository\UserRepository;
 
-class LevelController extends AbstractController {
+class RouteController extends AbstractController {
  
-
 
    #[Route('/{difficulty}', name: 'difficulty', requirements: ['difficulty' => 'easy|medium|hard'])]
     public function roomList(string $difficulty): Response
@@ -32,4 +33,22 @@ class LevelController extends AbstractController {
             'room_id'    => $room,
         ]);
     }
+
+
+    
+
+    #[Route('/admin/users', name: 'adminUserPanel')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function userGrid(UserRepository $userRepository): Response
+    {
+        
+        $users = $userRepository->findAll();
+
+        return $this->render('admin/adminUserPanel.html.twig', [
+            'users' => $users,
+        ]);
+    }
+
+
+    
 }
