@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('terminalSearch');
-    // Using querySelector is more flexible; it works if you use .class or #id
     const tableBody = document.querySelector('#userTableBody') || document.querySelector('.userTableBody');
     const rows = document.querySelectorAll('.user-row');
 
@@ -13,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = e.target.value.toLowerCase().trim();
         let matchCount = 0;
 
-        // Visual feedback: Start "Scan"
         tableBody.style.transition = 'opacity 0.15s ease';
         tableBody.style.opacity = '0.3';
 
@@ -30,8 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             tableBody.style.opacity = '1';
-
-            // Handle "No Matches" state
             handleNoResults(matchCount, tableBody, query);
         }, 150);
     });
@@ -45,7 +41,7 @@ function handleNoResults(count, container, query) {
             emptyMsg = document.createElement('tr');
             emptyMsg.id = 'matrix-empty-msg';
             emptyMsg.innerHTML = `
-                <td colspan="5" class="text-center py-5" style="color: #ff003c; text-shadow: 0 0 10px #ff003c;">
+                <td colspan="5" class="text-center py-5" style="color: #ff003c;">
                     [!] ERROR: NO_RECORDS_MATCHING_CRITERIA<br>
                     <span style="font-size: 0.8rem; opacity: 0.7;">SIGNAL_LOST...</span>
                 </td>`;

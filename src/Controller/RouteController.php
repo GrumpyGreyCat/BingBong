@@ -21,21 +21,16 @@ class RouteController extends AbstractController {
 
     #[Route('/{difficulty}/{room}', name: 'room', requirements: [
     'difficulty' => 'easy|medium|hard',
-    'room' => '\d+' // This ensures 'room' must be a number
+    'room' => '\d+'
     ])]
     public function roomView(string $difficulty, int $room): Response
     {
-        // In a real app, you'd fetch the specific challenge data here
-        // $challenge = $repository->findOneBy(['difficulty' => $difficulty, 'id' => $room]);
 
         return $this->render("room/room.html.twig", [
             'difficulty' => $difficulty,
             'room_id'    => $room,
         ]);
     }
-
-
-    
 
     #[Route('/admin/users', name: 'adminUserPanel')]
     #[IsGranted('ROLE_ADMIN')]
@@ -49,6 +44,4 @@ class RouteController extends AbstractController {
         ]);
     }
 
-
-    
 }

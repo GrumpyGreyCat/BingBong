@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+{% block navbar %}{{ parent() }}{% endblock %}
+
+<div class="signin-wrapper">
+    <div class="signin-card">
+        <h2 class="signin-title">
+            <span style="color: #00ff9d;">&gt;</span> Change data
+        </h2>
+
+        {{ form_start(updateUserForm) }}
+            <div class="mb-3">
+                {{ form_label(updateUserForm.email, 'Your Email') }}
+                {{ form_widget(updateUserForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email...'}}) }}
+            </div>
+            <div class="text-danger">
+                {{ form_errors(updateUserForm.email) }}
+            </div>
+            
+            
+            <div class="mb-3">
+                {{ form_label(updateUserForm.username, 'Your Username') }}
+                {{ form_widget(updateUserForm.username, {'attr': {'class': 'form-control', 'placeholder': 'Username...'}}) }}
+            </div>
+            <div class="text-danger">
+                {{ form_errors(updateUserForm.username) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(updateUserForm.password, 'Your Password') }}
+                {{ form_widget(updateUserForm.password, {'attr': {'class': 'form-control', 'placeholder': '••••••••'}}) }}
+            </div>
+
+            <button type="submit" class="ctf-btn">
+                Validate Change
+            </button>
+        {{ form_end(updateUserForm) }}
+    </div>
+</div>
+{% endblock %}
