@@ -17,11 +17,21 @@ class UpdateUserController extends AbstractController {
     #[Route('/updateUser/{uuidUser}', name: 'updateUser')]
     public function updateUser($uuidUser, Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $passwordHasher, StringManagement $stringManagement): Response {
         
+        $user = null;
+
         if ($stringManagement->isString($uuidUser)) {
             $user = $manager->find(User::class, $uuidUser);
-            
         }
 
+        if (!$user) {
+            throw $this->createNotFoundException('User not found.');
+        }
+
+        $authenticatedUser = $this->getUser();
+
+        if (!in_array('ROLE_ADMIN', $authenticatedUser->getRoles()) && $authenticatedUser !== $user) {
+            throw $this->createAccessDeniedException('You are not allowed to edit this profile.');
+        }
         $form = $this->createForm(UpdateUserType::class, $user);
         $form->handleRequest($request);
 
