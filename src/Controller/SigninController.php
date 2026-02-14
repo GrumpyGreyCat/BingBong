@@ -38,7 +38,7 @@ class SigninController extends AbstractController {
             return $this->redirectToRoute('login');
         }
 
-        return $this->render('authentification/signin.html.twig', [
+        return $this->render('authentication/signin.html.twig', [
             "signinForm" => $form->createView()
         ]);
     }

@@ -44,6 +44,7 @@
                             {% endfor %}
                         </td>
                         <td class="text-end">
+                            <a href="{{ path('profilePage', {'uuidUser': user.id}) }}" class="action-link">VIEW</a>
                             <a href="{{ path('updateUser', {'uuidUser': user.id}) }}" class="action-link">MODIFY</a>
                             <a href="{{ path('delUser', {'uuidUser': user.id}) }}" class="action-link">DELETE</a>
                         </td>

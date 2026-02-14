@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+{% block navbar %}{{ parent() }}{% endblock %}
+<div class="container mt-5 ">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">User Profile</h2>
+            {# Only show the edit button if the user is an admin or the owner #}
+            {% if is_granted('ROLE_ADMIN') or app.user == user %}
+                <a href="{{ path('updateUser', {'uuidUser': user.id}) }}" class="btn btn-light btn-sm">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </a>
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    {# Placeholder for a profile image #}
+                    <img src="https://ui-avatars.com/api/?name={{ user.email }}&size=150" class="rounded-circle img-thumbnail" alt="Avatar">
+                </div>
+                <div class="col-md-8">
+                    ### Account Details
+                    <table class="table table-borderless">
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>UUID:</th>
+                            <td><small class="text-muted">{{ user.id }}</small></td>
+                        </tr>
+                        <tr>
+                            <th>Roles:</th>
+                            <td>
+                                {% for role in user.roles %}
+                                    <span class="badge bg-info text-dark">{{ role }}</span>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <a href="{{ path('home') }}" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -51,7 +51,7 @@ class UpdateUserController extends AbstractController {
         
         }
 
-        return $this->render('authentification/updateUser.html.twig', [
+        return $this->render('authentication/updateUser.html.twig', [
             "updateUserForm" => $form->createView()
         ]);
     }

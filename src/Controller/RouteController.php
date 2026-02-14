@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Repository\UserRepository;
+use App\Service\StringManagement;
+use Doctrine\ORM\EntityManagerInterface;
 
 class RouteController extends AbstractController {
  
@@ -23,6 +26,7 @@ class RouteController extends AbstractController {
     'difficulty' => 'easy|medium|hard',
     'room' => '\d+'
     ])]
+
     public function roomView(string $difficulty, int $room): Response
     {
 
@@ -36,7 +40,6 @@ class RouteController extends AbstractController {
     #[IsGranted('ROLE_ADMIN')]
     public function userGrid(UserRepository $userRepository): Response
     {
-        
         $users = $userRepository->findAll();
 
         return $this->render('admin/adminUserPanel.html.twig', [
@@ -44,4 +47,27 @@ class RouteController extends AbstractController {
         ]);
     }
 
+    #[Route('/profile/{uuidUser}', name: 'profilePage')]
+    public function profilePage(string $uuidUser, StringManagement $stringManagement, EntityManagerInterface $manager): Response
+    {
+        $user = null;
+
+        if ($stringManagement->isString($uuidUser)) {
+            $user = $manager->find(User::class, $uuidUser);
+        }
+
+        if (!$user) {
+            throw $this->createNotFoundException('User not found.');
+        }
+
+        $authenticatedUser = $this->getUser();
+
+        if (!in_array('ROLE_ADMIN', $authenticatedUser->getRoles()) && $authenticatedUser !== $user) {
+            throw $this->createAccessDeniedException('You are not allowed to view this profile.');
+        }
+
+        return $this->render('authentication/profile.html.twig', [
+            'user' => $user,
+        ]);
+    }
 }
