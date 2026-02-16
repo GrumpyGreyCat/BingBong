@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5 text-center">
+        <h1 class="text-warning">SYSTEM_CRASH_500</h1>
+        <p>The server encountered a logic error. Check your syntax, hacker.</p>
+        <a href="{{ path('home') }}" class="btn btn-warning">REBOOT</a>
+    </div>
+{% endblock %}

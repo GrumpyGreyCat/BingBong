@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+{% block navbar %}{{ parent() }}{% endblock %}
+<div class="container text-center mt-5">
+    <div class="error-wrapper p-5" style="background: #0a0a0a; border: 1px solid #ff0000; border-radius: 10px; box-shadow: 0 0 20px rgba(255,0,0,0.2);">
+        <h1 class="display-1 text-danger fw-bold" style="text-shadow: 2px 2px #000;">404</h1>
+        <h2 class="text-white mb-4">&gt; TARGET_NOT_FOUND</h2>
+        
+        <div class="terminal-text mb-4" style="font-family: 'Courier New', monospace; color: #aaa;">
+            <p class="mb-1">[!] Warning: The requested coordinates do not exist in the database.</p>
+            <p class="mb-1">[!] Trace: {{ app.request.uri }}</p>
+            <p>[!] Status: Connection Terminated.</p>
+        </div>
+
+        <div class="glitch-box mb-5">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKSjPQCvXvB970/giphy.gif" 
+                 alt="Glitch" style="width: 200px; opacity: 0.5; filter: grayscale(100%) sepia(100%) hue-rotate(0deg) saturate(500%);">
+        </div>
+
+        <a href="{{ path('home') }}" class="btn btn-outline-danger btn-lg px-5">
+            <i class="fas fa-undo-alt me-2"></i> REBOOT_TO_DASHBOARD
+        </a>
+    </div>
+</div>
+
+<style>
+    body { background-color: #050505 !timportant; }
+    .error-wrapper { animation: flicker 0.15s infinite alternate; }
+    @keyframes flicker {
+        0% { opacity: 0.98; }
+        100% { opacity: 1; }
+    }
+</style>
+{% endblock %}

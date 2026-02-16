@@ -27,9 +27,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Terminal</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Challenges</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Scoreboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ path('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('scoreboard') }}">Scoreboard</a></li>
                     {% if is_granted('ROLE_ADMIN') %}
                     
                     <li class="nav-item dropdown">
