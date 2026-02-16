@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\RoomRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,15 +27,22 @@ class RouteController extends AbstractController {
     'difficulty' => 'easy|medium|hard',
     'room' => '\d+'
     ])]
-
-    public function roomView(string $difficulty, int $room): Response
+    public function roomView(string $difficulty, int $room, RoomRepository $roomRepository): Response
     {
+    // Find the room that matches BOTH the number and the difficulty
+    $roomEntity = $roomRepository->findOneBy([
+        'number' => $room,
+        'difficulty' => $difficulty
+    ]);
 
-        return $this->render("room/room.html.twig", [
-            'difficulty' => $difficulty,
-            'room_id'    => $room,
-        ]);
+    if (!$roomEntity) {
+        throw $this->createNotFoundException('This challenge room does not exist.');
     }
+
+    return $this->render("room/room.html.twig", [
+        'room' => $roomEntity, // Pass the whole object!
+    ]);
+}
 
     #[Route('/admin/users', name: 'adminUserPanel')]
     #[IsGranted('ROLE_ADMIN')]
