@@ -7,15 +7,13 @@
         <div id="message"></div>
     </div>
 
-    <p class="hidden-hint">The flag is hidden in the checkPin function logic!</p>
+    <p class="hidden-hint">The flag is hidden in the javascript function</p>
 
     <script>
         function checkPin() {
             const pin = document.getElementById('pin').value;
             const msg = document.getElementById('message');
             
-            // LOGIC: A simple hardcoded check. 
-            // In a CTF, the user would right-click > Inspect to find this.
             if (pin === '1337') {
                 msg.style.color = '#7ee787';
                 msg.innerHTML = "ACCESS GRANTED.<br>FLAG: <strong>FLAG{7803c177748c532636d5dfcb4107efdb}</strong>";
