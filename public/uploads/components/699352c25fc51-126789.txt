@@ -1,0 +1,11 @@
+vm : OulanBator
+user : oulan 
+pswd : oulan
+iso : debian 13
+ip : 192.168.122.243/24
+
+vm : dacca
+user : dacca
+pswd : dacca
+iso : ubuntu server 24.04
+ip : 192.168.122.94/24

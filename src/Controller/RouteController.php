@@ -70,4 +70,5 @@ class RouteController extends AbstractController {
             'user' => $user,
         ]);
     }
+
 }

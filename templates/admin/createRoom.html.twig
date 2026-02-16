@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h2 class="h4 mb-0">Create New CTF Room</h2>
+                </div>
+                <div class="card-body">
+                    {{ form_start(roomForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form_label(roomForm.number, 'Room Number') }}
+                                {{ form_widget(roomForm.number, {'attr': {'class': 'form-control', 'placeholder': 'e.g. 101'}}) }}
+                                {{ form_errors(roomForm.number) }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form_label(roomForm.difficulty, 'Difficulty Level') }}
+                                {{ form_widget(roomForm.difficulty, {'attr': {'class': 'form-select'}}) }}
+                                {{ form_errors(roomForm.difficulty) }}
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form_label(roomForm.component, 'Upload Challenge (HTML file)') }}
+                            {{ form_widget(roomForm.component, {'attr': {'class': 'form-control'}}) }}
+                            <div class="form-text">Upload the HTML/JS component that users will interact with.</div>
+                            {{ form_errors(roomForm.component) }}
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ path('home') }}" class="btn btn-outline-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-success px-4">Create Room</button>
+                        </div>
+
+                    {{ form_end(roomForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

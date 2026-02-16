@@ -12,7 +12,6 @@ class AppFixtures extends Fixture
 {
     private UserPasswordHasherInterface $passwordHasher;
 
-    // Injecte la dépendance UserPasswordHasherInterface pour instancier la classe 'User'
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;
@@ -22,7 +21,6 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        // 1. Create an Admin so you can access the /admin/userPanel
         $admin = new User();
         $admin->setUserName('admin');
         $admin->setEmail('admin@example.com');
@@ -30,7 +28,6 @@ class AppFixtures extends Fixture
         $admin->setPassword($this->passwordHasher->hashPassword($admin, 'admin123'));
         $manager->persist($admin);
 
-        // 2. Create 20 random users
         for ($i = 0; $i < 20; $i++) {
             $user = new User();
             $user->setUserName($faker->userName());

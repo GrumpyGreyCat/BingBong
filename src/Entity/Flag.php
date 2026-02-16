@@ -13,8 +13,9 @@ class Flag
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $room_id = null;
+    #[ORM\OneToOne(targetEntity: Room::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Room $room = null;
 
     #[ORM\Column]
     private ?string $flag = null;
@@ -31,14 +32,15 @@ class Flag
         return $this;
     }
 
-    public function getRoomId(): ?int
+
+    public function getRoom(): ?Room
     {
-        return $this->room_id;
+        return $this->room;
     }
 
-    public function setRoomId(int $room_id): static
+    public function setRoom(Room $room): static
     {
-        $this->room_id = $room_id;
+        $this->room = $room;
         return $this;
     }
 

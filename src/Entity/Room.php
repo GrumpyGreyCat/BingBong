@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use App\enum\Difficulty;
 use App\Repository\RoomRepository;
 use Doctrine\ORM\Mapping as ORM;
-use App\Enum\Difficulty;
+
 
 #[ORM\Entity(repositoryClass: RoomRepository::class)]
 class Room
@@ -22,6 +23,8 @@ class Room
     private ?int $number = null;
 
     #[ORM\Column]
+    private ?string $component = null;
+
 
     public function getId(): ?int
     {
@@ -56,4 +59,15 @@ class Room
         $this->number = $number;
         return $this;
     }
+
+    public function getComponent(): ?string
+    {
+        return $this->component;
+    }
+
+    public function setComponent(string $component): static
+    {
+        $this->component = $component;
+        return $this;
+    }   
 }
