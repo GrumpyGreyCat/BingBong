@@ -63,6 +63,7 @@ class CreateRoomController extends AbstractController
 
         return $this->render('/admin/createRoom.html.twig', [
             'roomForm' => $form->createView(),
+            'edit_mode' => false
         ]);
     }
 }

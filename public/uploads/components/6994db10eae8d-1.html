@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #00040a; color: #58a6ff; font-family: 'Courier New', monospace; text-align: center; }
+        input { background: #0d1117; border: 1px solid #30363d; color: white; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h2>🔐 Encrypted Buffer</h2>
+    <p>The flag is stored in the <code>system_buffer</code> variable.</p>
+    <p>Can you find a way to print it?</p>
+    
+    <script>
+        // In a real CTF, students open the F12 Console and type: console.log(system_buffer)
+        var system_buffer = "{{ flag }}";
+        
+        function checkPass() {
+            alert("Checking... access denied. Try looking at the global variables.");
+        }
+    </script>
+    <button onclick="checkPass()" style="background: #238636; color: white; border: none; padding: 10px 20px; cursor:pointer;">REVEAL</button>
+</body>
+</html>

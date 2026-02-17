@@ -19,7 +19,12 @@ class ScoreboardController extends AbstractController {
                 SUM(CASE WHEN r.difficulty = \'easy\' THEN 1 ELSE 0 END) as easySolved,
                 SUM(CASE WHEN r.difficulty = \'medium\' THEN 1 ELSE 0 END) as mediumSolved,
                 SUM(CASE WHEN r.difficulty = \'hard\' THEN 1 ELSE 0 END) as hardSolved,
-                SUM(r.number * 10) as totalPoints, 
+                SUM(CASE 
+                    WHEN r.difficulty = \'easy\' THEN 10 
+                    WHEN r.difficulty = \'medium\' THEN 20
+                    WHEN r.difficulty = \'hard\' THEN 30
+                    ELSE 0 
+                END) as totalPoints, 
                 MAX(s.date) as lastSolve
         FROM App\Entity\Solve s
         JOIN s.user u

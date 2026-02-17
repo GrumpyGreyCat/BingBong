@@ -10,14 +10,25 @@
     </header>
 
     <div class="room-grid grid">
-    {% for room in 1..19 %}
-        <a href="{{ path('room', {'difficulty': difficulty, 'room': room}) }}" class="room-btn">
-            <span class="room-num">{{ room|format('%02d') }}</span>
-            <span class="room-meta">ACTIVE</span>
-        </a>
-    {% endfor %}
-</div>
-        
+        {% for room in rooms %}
+            <a href="{{ path('room', {'difficulty': difficulty, 'room': room.number}) }}" class="room-btn">
+                <span class="room-num">{{ room.number|format('%02d') }}</span>
+                <span class="room-meta">ACTIVE</span>
+            </a>
+            }
+            {% if loop.last %}
+                <div class="room-btn disabled" style="opacity: 0.5; cursor: not-allowed; filter: grayscale(1); border-style: dashed;">
+                    <span class="room-num">{{ (room.number + 1)|format('%02d') }}</span>
+                    <span class="room-meta"><i class="fas fa-lock"></i> LOCKED</span>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="room-btn disabled" style="opacity: 0.5; cursor: not-allowed;">
+                <span class="room-num">01</span>
+                <span class="room-meta"><i class="fas fa-lock"></i> NO_ROOMS</span>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 </section>
 {% endblock %}

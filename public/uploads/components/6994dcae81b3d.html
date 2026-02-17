@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        :root { --neon-green: #00ff41; --dark-bg: #0a0a0a; }
+        body { 
+            background-color: var(--dark-bg); 
+            color: var(--neon-green); 
+            font-family: 'Courier New', monospace; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; height: 90vh; margin: 0; overflow: hidden;
+        }
+        .vault-container {
+            border: 2px solid var(--neon-green);
+            padding: 30px;
+            background: rgba(0, 255, 65, 0.05);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            text-align: center;
+            max-width: 500px;
+        }
+        .binary-hint {
+            background: #000;
+            padding: 10px;
+            border: 1px dashed var(--neon-green);
+            margin: 20px 0;
+            word-break: break-all;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+        input {
+            background: transparent;
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 10px;
+            text-align: center;
+            outline: none;
+            width: 150px;
+        }
+        button {
+            background: var(--neon-green);
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover { opacity: 0.8; }
+        #result { margin-top: 20px; font-weight: bold; min-height: 1.2em; }
+    </style>
+</head>
+<body>
+
+    <div class="vault-container">
+        <h2>🔒 ENCRYPTED_VAULT_v2.1</h2>
+        <p>Intercepted transmission (Binary):</p>
+        
+        <div class="binary-hint">
+            00001001 00000101 00000011 00000111
+        </div>
+
+        <p>Convert the binary to ASCII digits to unlock:</p>
+        <input type="text" id="vault-pin" placeholder="ENTER_PIN" maxlength="4">
+        <br>
+        <button onclick="unlock()">ACCESS_SYSTEM</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function unlock() {
+            const pin = document.getElementById('vault-pin').value;
+            const res = document.getElementById('result');
+            
+            // LOGIC: Binary 00111001 (9) 00110101 (5) 00110011 (3) 00110111 (7)
+            // The code is: 9537
+            if (pin === '9537') {
+                res.style.color = "#fff";
+		    res.innerHTML = "ACCESS GRANTED. {{ flag }}";
+            } else {
+                res.style.color = "#ff4444";
+                res.innerText = "DENIED: INVALID_CREDENTIALS";
+            }
+        }
+    </script>
+</body>
+</html>

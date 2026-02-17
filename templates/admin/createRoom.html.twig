@@ -36,7 +36,11 @@
 
                         <div class="d-flex justify-content-between">
                             <a href="{{ path('home') }}" class="btn btn-outline-secondary">Cancel</a>
+                            {% if edit_mode == true %}
+                            <button type="submit" class="btn btn-success px-4">Update Room</button>
+                            {% else %}
                             <button type="submit" class="btn btn-success px-4">Create Room</button>
+                            {% endif %}
                         </div>
 
                     {{ form_end(roomForm) }}

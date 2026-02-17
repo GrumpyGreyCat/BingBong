@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #1a1a1a; color: #ffcc00; font-family: serif; text-align: center; padding: 40px; }
+        .warning { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>🍪 THE COOKIE VAULT</h2>
+    <p class="warning">SECURE AREA: Authorized Personnel Only.</p>
+    <p>We've stored your temporary session flag in your browser's local document storage.</p>
+    <button onclick="hint()">Get Hint</button>
+    <p id="output"></p>
+
+    <script>
+        // We inject the flag into a fake "cookie" property for this document
+        document.cookie = "session_secret={{ flag }}; path=/";
+
+        function hint() {
+            document.getElementById('output').innerText = "Try typing 'document.cookie' in your browser console!";
+        }
+    </script>
+</body>
+</html>

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Flag;
+use App\Entity\Room;
 use App\Repository\RoomRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
@@ -16,20 +18,25 @@ class RouteController extends AbstractController {
  
 
    #[Route('/{difficulty}', name: 'difficulty', requirements: ['difficulty' => 'easy|medium|hard'])]
-    public function roomList(string $difficulty): Response
+    public function roomList(string $difficulty, RoomRepository $repo): Response
     {
-        return $this->render("room/grid.html.twig", [
-            'difficulty' => $difficulty,
-        ]);
+        $rooms = $repo->findBy(
+        ['difficulty' => $difficulty],
+        ['number' => 'ASC']
+    );
+
+    return $this->render('room/grid.html.twig', [
+        'difficulty' => $difficulty,
+        'rooms' => $rooms,
+    ]);
     }
 
     #[Route('/{difficulty}/{room}', name: 'room', requirements: [
     'difficulty' => 'easy|medium|hard',
     'room' => '\d+'
     ])]
-    public function roomView(string $difficulty, int $room, RoomRepository $roomRepository): Response
+    public function roomView(string $difficulty, int $room, RoomRepository $roomRepository, EntityManagerInterface $em): Response
     {
-    // Find the room that matches BOTH the number and the difficulty
     $roomEntity = $roomRepository->findOneBy([
         'number' => $room,
         'difficulty' => $difficulty
@@ -39,9 +46,30 @@ class RouteController extends AbstractController {
         throw $this->createNotFoundException('This challenge room does not exist.');
     }
 
+    $flagEntity = $em->getRepository(Flag::class)->findOneBy(['room' => $roomEntity]);
+
     return $this->render("room/room.html.twig", [
-        'room' => $roomEntity, // Pass the whole object!
+        'room' => $roomEntity,
+        'secretFlag' => $flagEntity ? $flagEntity->getFlag() : 'FLAG_NOT_SET',
     ]);
+    }
+
+#[Route('/room/component/render/{id}', name: 'render_component')]
+public function renderComponent(Room $room, EntityManagerInterface $em): Response
+{
+    $flagEntity = $em->getRepository(Flag::class)->findOneBy(['room' => $room]);
+    $realFlag = $flagEntity ? $flagEntity->getFlag() : 'DEBUG_NO_FLAG_FOUND';
+
+    $filePath = $this->getParameter('kernel.project_dir') . '/public/uploads/components/' . $room->getComponent();
+
+    if (!file_exists($filePath)) {
+        return new Response('File not found: ' . $filePath, 404);
+    }
+
+    $content = file_get_contents($filePath);
+    $content = str_replace('{{ flag }}', $realFlag, $content);
+
+    return new Response($content);
 }
 
     #[Route('/admin/users', name: 'adminUserPanel')]

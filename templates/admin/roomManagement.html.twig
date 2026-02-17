@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% block navbar %}{{ parent() }}{% endblock %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-white"><i class="fas fa-tasks me-2"></i> ROOM_DATABASE</h1>
+        <a href="{{ path('createRoom') }}" class="btn btn-success">
+            <i class="fas fa-plus"></i> CREATE_NEW
+        </a>
+    </div>
+
+    <div class="card bg-dark border-secondary shadow">
+        <div class="card-body p-0">
+            <table class="table table-dark table-hover mb-0 align-middle">
+                <thead>
+                    <tr class="text-muted small">
+                        <th class="ps-4">#</th>
+                        <th>NUMBER</th>
+                        <th>DIFFICULTY</th>
+                        <th class="text-center">SOLVES</th>
+                        <th>COMPONENT_FILE</th>
+                        <th class="text-end pe-4">ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for room in rooms %}
+                    <tr>
+                        <td class="ps-4">{{ room.id }}</td>
+                        <td><span class="fw-bold text-primary">{{ room.number }}</span></td>
+                        <td>
+                            <span class="badge 
+                                {% if room.difficulty.value == 'easy' %}bg-success
+                                {% elseif room.difficulty.value == 'medium' %}bg-warning text-dark
+                                {% else %}bg-danger{% endif %}">
+                                {{ room.difficulty.value|upper }}
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <span class="badge rounded-pill bg-info text-dark">
+                                <i class="fas fa-check-double"></i> {{ solveCounts[room.id] }}
+                            </span>
+                        </td>
+                        <td class="small">{{ room.component|default('None') }}</td>
+                        <td class="text-end pe-4">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ path('roomEdit', {id: room.id}) }}" class="btn btn-outline-light">
+                                    <i class="fas fa-edit">Edit</i>
+                                </a>
+                                <button type="button" class="btn btn-outline-danger" 
+                                        onclick="if(confirm('Delete room {{ room.number }}?')) { window.location.href='{{ path('roomDelete', {id: room.id}) }}' }">
+                                    <i class="fas fa-trash">Delete</i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5">No rooms found in the matrix.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

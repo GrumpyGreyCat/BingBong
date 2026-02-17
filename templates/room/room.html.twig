@@ -15,9 +15,9 @@
         <div class="puzzle-content">
             {% if room.component %}
                 <iframe 
-                    src="{{ asset('uploads/components/' ~ room.component) }}" 
+                    src="{{ path('render_component', {id: room.id}) }}" 
                     style="width: 100%; height: 600px; border: none; background: #fff;"
-                    sandbox="allow-scripts allow-forms">
+                    sandbox="allow-scripts allow-forms allow-same-origin allow-modals">
                 </iframe>
             {% else %}
                 <p>No component uploaded for this room.</p>
