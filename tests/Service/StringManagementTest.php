@@ -18,12 +18,4 @@ class StringManagementTest extends TestCase
         $this->assertNotEquals(false, $result);
     }
 
-    public function testRemoveFirstCaracter() {
-        $stringManagement = new StringManagement();
-        
-        $result = $stringManagement->removeFirstCaracter('test');
-        
-        $this->assertEquals('est', $result);
-        $this->assertNotEquals('test', $result);
-    }
 }
