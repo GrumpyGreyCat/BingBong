@@ -2,45 +2,50 @@
 
 {% block body %}
 {% block navbar %}{{ parent() }}{% endblock %}
-<div class="container mt-5">
+
+<div class="container directory-container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card shadow">
-                <div class="card-header bg-dark text-white">
-                    <h2 class="h4 mb-0">Create New CTF Room</h2>
+            <div class="matrix-card">
+                <div class="matrix-card-header">
+                    <h2 class="h4 mb-0 matrix-glow">
+                        <span class="brand-accent">></span> 
+                        {% if edit_mode %}UPDATE_NODE_CONFIG{% else %}INITIALIZE_NEW_NODE{% endif %}
+                    </h2>
                 </div>
-                <div class="card-body">
-                    {{ form_start(roomForm, {'attr': {'enctype': 'multipart/form-data'}}) }}
+                <div class="card-body p-4">
+                    {{ form_start(roomForm, {'attr': {'enctype': 'multipart/form-data', 'class': 'matrix-form'}}) }}
                         
                         <div class="row">
-                            <div class="col-md-6 mb-3">
-                                {{ form_label(roomForm.number, 'Room Number') }}
-                                {{ form_widget(roomForm.number, {'attr': {'class': 'form-control', 'placeholder': 'e.g. 101'}}) }}
-                                {{ form_errors(roomForm.number) }}
+                            <div class="col-md-6 mb-4">
+                                {{ form_label(roomForm.number, 'ROOM_IDENTIFIER', {'label_attr': {'class': 'terminal-label-sm'}}) }}
+                                {{ form_widget(roomForm.number, {'attr': {'class': 'matrix-input', 'placeholder': 'e.g. 101'}}) }}
+                                <div class="error-text">{{ form_errors(roomForm.number) }}</div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                {{ form_label(roomForm.difficulty, 'Difficulty Level') }}
-                                {{ form_widget(roomForm.difficulty, {'attr': {'class': 'form-select'}}) }}
-                                {{ form_errors(roomForm.difficulty) }}
+                            <div class="col-md-6 mb-4">
+                                {{ form_label(roomForm.difficulty, 'CLEARANCE_LEVEL', {'label_attr': {'class': 'terminal-label-sm'}}) }}
+                                {{ form_widget(roomForm.difficulty, {'attr': {'class': 'matrix-input matrix-select'}}) }}
+                                <div class="error-text">{{ form_errors(roomForm.difficulty) }}</div>
                             </div>
                         </div>
 
-                        <div class="mb-4">
-                            {{ form_label(roomForm.component, 'Upload Challenge (HTML file)') }}
-                            {{ form_widget(roomForm.component, {'attr': {'class': 'form-control'}}) }}
-                            <div class="form-text">Upload the HTML/JS component that users will interact with.</div>
-                            {{ form_errors(roomForm.component) }}
+                        <div class="mb-5">
+                            {{ form_label(roomForm.component, 'INJECT_COMPONENT_FILE (.html)', {'label_attr': {'class': 'terminal-label-sm'}}) }}
+                            {{ form_widget(roomForm.component, {'attr': {'class': 'matrix-input'}}) }}
+                            <div class="terminal-subtitle mt-2">Target payload for user interface deployment.</div>
+                            <div class="error-text">{{ form_errors(roomForm.component) }}</div>
                         </div>
 
-                        <hr>
-
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ path('home') }}" class="btn btn-outline-secondary">Cancel</a>
-                            {% if edit_mode == true %}
-                            <button type="submit" class="btn btn-success px-4">Update Room</button>
-                            {% else %}
-                            <button type="submit" class="btn btn-success px-4">Create Room</button>
-                            {% endif %}
+                        <div class="matrix-form-footer d-flex justify-content-between align-items-center pt-4 border-top-terminal">
+                            <a href="{{ path('home') }}" class="action-link delete">[ ABORT_OPERATION ]</a>
+                            
+                            <button type="submit" class="matrix-btn">
+                                {% if edit_mode %}
+                                    [ EXECUTE_UPDATE ]
+                                {% else %}
+                                    [ EXECUTE_CREATION ]
+                                {% endif %}
+                            </button>
                         </div>
 
                     {{ form_end(roomForm) }}

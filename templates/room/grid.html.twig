@@ -3,32 +3,53 @@
 {% block body %}
 {% block navbar %}{{ parent() }}{% endblock %}
 
-<section>
-<div class="level-selector-page">
-    <header class="level-header">
-        <h1>{{ difficulty|upper }}_ROOMS</h1>
-    </header>
+<section class="directory-container">
+    <div class="container">
+        <header class="level-header mb-5 text-center">
+            <h1 class="matrix-title">
+                <span class="matrix-glow">></span> {{ difficulty|upper }}_SECTOR_NODES
+            </h1>
+            <div class="terminal-bar"></div>
+        </header>
 
-    <div class="room-grid grid">
-        {% for room in rooms %}
-            <a href="{{ path('room', {'difficulty': difficulty, 'room': room.number}) }}" class="room-btn">
-                <span class="room-num">{{ room.number|format('%02d') }}</span>
-                <span class="room-meta">ACTIVE</span>
-            </a>
-            }
-            {% if loop.last %}
-                <div class="room-btn disabled" style="opacity: 0.5; cursor: not-allowed; filter: grayscale(1); border-style: dashed;">
-                    <span class="room-num">{{ (room.number + 1)|format('%02d') }}</span>
-                    <span class="room-meta"><i class="fas fa-lock"></i> LOCKED</span>
+        <div class="room-grid">
+            {% for room in rooms %}
+                <a href="{{ path('room', {'difficulty': difficulty, 'room': room.number}) }}" class="node-card active-node">
+                    <div class="node-header">
+                        <span class="node-status-dot"></span>
+                        <span class="node-label">NODE_READY</span>
+                    </div>
+                    <div class="node-body">
+                        <span class="room-num">{{ room.number|format('%03d') }}</span>
+                    </div>
+                    <div class="node-footer">
+                        <span class="room-meta">ACCESS_GRANTED</span>
+                    </div>
+                    <div class="node-scanner"></div>
+                </a>
+
+                {% if loop.last %}
+                    <div class="node-card locked-node">
+                        <div class="node-header">
+                            <span class="node-label">REDACTED</span>
+                        </div>
+                        <div class="node-body">
+                            <span class="room-num">???</span>
+                        </div>
+                        <div class="node-footer">
+                            <span class="room-meta">[ LOCKED ]</span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="node-card locked-node w-100">
+                    <div class="node-body">
+                        <span class="room-num">000</span>
+                        <p class="matrix-glow">NO_ACTIVE_NODES_IN_SECTOR</p>
+                    </div>
                 </div>
-            {% endif %}
-        {% else %}
-            <div class="room-btn disabled" style="opacity: 0.5; cursor: not-allowed;">
-                <span class="room-num">01</span>
-                <span class="room-meta"><i class="fas fa-lock"></i> NO_ROOMS</span>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
 </section>
 {% endblock %}

@@ -1,42 +1,48 @@
 {% extends "base.html.twig" %}
 
-
 {% block body %}
 {% block navbar %}{{ parent() }}{% endblock %}
 
-<div class="signin-wrapper">
-    <div class="signin-card">
-        <h2 class="signin-title">
-            <span style="color: #00ff9d;">&gt;</span> AUTH_REQUIRED
-        </h2>
+<div class="login-wrapper"> {# Reusing the login-wrapper for perfect centering #}
+    <div class="matrix-card login-card-custom">
+        <div class="matrix-card-header text-center">
+            <h2 class="matrix-title h4 mb-0">
+                <span class="matrix-glow">></span> NEW_OPERATOR_ENROLLMENT
+            </h2>
+        </div>
 
-        {{ form_start(signinForm) }}
-            <div class="mb-3">
-                {{ form_label(signinForm.email, 'Your Email') }}
-                {{ form_widget(signinForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email...'}}) }}
-            </div>
-            <div class="text-danger">
-                {{ form_errors(signinForm.email) }}
-            </div>
-            
-            
-            <div class="mb-3">
-                {{ form_label(signinForm.username, 'Your Username') }}
-                {{ form_widget(signinForm.username, {'attr': {'class': 'form-control', 'placeholder': 'Username...'}}) }}
-            </div>
-            <div class="text-danger">
-                {{ form_errors(signinForm.username) }}
-            </div>
+        <div class="card-body p-4">
+            {{ form_start(signinForm, {'attr': {'class': 'matrix-form'}}) }}
+                
+                <div class="mb-4">
+                    {{ form_label(signinForm.email, 'SIGNAL_ADDRESS (EMAIL)', {'label_attr': {'class': 'terminal-label-sm'}}) }}
+                    {{ form_widget(signinForm.email, {'attr': {'class': 'form-control matrix-input', 'placeholder': 'address@network.com'}}) }}
+                    <div class="error-text">{{ form_errors(signinForm.email) }}</div>
+                </div>
+                
+                <div class="mb-4">
+                    {{ form_label(signinForm.username, 'OPERATOR_HANDLE (USERNAME)', {'label_attr': {'class': 'terminal-label-sm'}}) }}
+                    {{ form_widget(signinForm.username, {'attr': {'class': 'form-control matrix-input', 'placeholder': 'Choose handle...'}}) }}
+                    <div class="error-text">{{ form_errors(signinForm.username) }}</div>
+                </div>
 
-            <div class="mb-3">
-                {{ form_label(signinForm.password, 'Your Password') }}
-                {{ form_widget(signinForm.password, {'attr': {'class': 'form-control', 'placeholder': '••••••••'}}) }}
-            </div>
+                <div class="mb-4">
+                    {{ form_label(signinForm.password, 'ENCRYPTION_KEY (PASSWORD)', {'label_attr': {'class': 'terminal-label-sm'}}) }}
+                    {{ form_widget(signinForm.password, {'attr': {'class': 'form-control matrix-input', 'placeholder': '••••••••'}}) }}
+                    <div class="error-text">{{ form_errors(signinForm.password) }}</div>
+                </div>
 
-            <button type="submit" class="ctf-btn">
-                Initialize Session
-            </button>
-        {{ form_end(signinForm) }}
+                <button type="submit" class="matrix-btn w-100 py-3 mt-2">
+                    [ REGISTER_IDENTITY ]
+                </button>
+            {{ form_end(signinForm) }}
+
+            <div class="text-center mt-4">
+                <h4 class="terminal-subtitle">
+                    ALREADY_ENROLLED? <a href="{{ path('login') }}" class="action-link view">RETURN_TO_LOGIN</a>
+                </h4>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

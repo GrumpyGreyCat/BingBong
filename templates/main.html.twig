@@ -3,13 +3,23 @@
 {% block navbar %}{{ parent() }}{% endblock %}
 
 {% block menu %}
-<section class="menu">
-    <div class="container container-fluid button-container">
+<section class="menu-selection-area">
+    <div class="container">
         <div class="row">
-            <div class="col-12 d-grid gap-5">
-                <a href="{{ path('difficulty', {'difficulty': 'easy'}) }}" class="link"><button class="btn w-25 mx-auto level-selection">Easy Rooms</button>
-                <a href="{{ path('difficulty', {'difficulty': 'medium'}) }}" class="link"><button class="btn w-25 mx-auto level-selection">Medium Rooms</button>
-                <a href="{{ path('difficulty', {'difficulty': 'hard'}) }}" class="link"><button class="btn w-25 mx-auto level-selection"> Hard Rooms</button>
+            <div class="col-12 d-flex flex-column align-items-center gap-4">
+                <h2 class="terminal-header mb-5">SELECT_ACCESS_LEVEL</h2>
+                
+                <a href="{{ path('difficulty', {'difficulty': 'easy'}) }}" class="matrix-level-btn easy" data-text="EASY_ROOMS">
+                    <span class="btn-bracket">[</span> EASY_ROOMS <span class="btn-bracket">]</span>
+                </a>
+
+                <a href="{{ path('difficulty', {'difficulty': 'medium'}) }}" class="matrix-level-btn medium" data-text="MEDIUM_ROOMS">
+                    <span class="btn-bracket">[</span> MEDIUM_ROOMS <span class="btn-bracket">]</span>
+                </a>
+
+                <a href="{{ path('difficulty', {'difficulty': 'hard'}) }}" class="matrix-level-btn hard" data-text="HARD_ROOMS">
+                    <span class="btn-bracket">[</span> HARD_ROOMS <span class="btn-bracket">]</span>
+                </a>
             </div>
         </div>
     </div>

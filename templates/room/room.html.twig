@@ -3,55 +3,70 @@
 {% block body %}
 {% block navbar %}{{ parent() }}{% endblock %}
 
-<div class="room-container">
-    <header class="room-header">
-        <span class="badge {{ room.difficulty.value }}">
-            {{ room.difficulty.value|upper }} MODE
-        </span>
-        <h1>ROOM_{{ room.number|format('%02d') }}</h1>
-    </header>
+<div class="container directory-container">
+    <div class="matrix-card challenge-card">
+        <header class="matrix-card-header d-flex justify-content-between align-items-center">
+            <div>
+                <span class="m-badge 
+                    {% if room.difficulty.value == 'easy' %}badge-easy
+                    {% elseif room.difficulty.value == 'medium' %}badge-medium
+                    {% else %}badge-hard{% endif %} mb-2">
+                    {{ room.difficulty.value|upper }}_ACCESS
+                </span>
+                <h1 class="matrix-title mb-0 h3">NODE_TARGET: {{ room.number|format('%03d') }}</h1>
+            </div>
+            <div class="system-status d-none d-md-block">
+                <span class="blink text-success small">● ENCRYPTED_CONNECTION</span>
+            </div>
+        </header>
 
-    <main class="challenge-container">
-        <div class="puzzle-content">
-            {% if room.component %}
-                <iframe 
-                    src="{{ path('render_component', {id: room.id}) }}" 
-                    style="width: 100%; height: 600px; border: none; background: #fff;"
-                    sandbox="allow-scripts allow-forms allow-same-origin allow-modals">
-                </iframe>
-            {% else %}
-                <p>No component uploaded for this room.</p>
-            {% endif %}
-        </div>
+        <main class="card-body p-0">
+            <div class="puzzle-wrapper">
+                {% if room.component %}
+                    <iframe 
+                        src="{{ path('render_component', {id: room.id}) }}" 
+                        class="terminal-iframe"
+                        sandbox="allow-scripts allow-forms allow-same-origin allow-modals">
+                    </iframe>
+                {% else %}
+                    <div class="text-center py-5">
+                        <p class="terminal-error-text">[!] ERROR: COMPONENT_NOT_FOUND</p>
+                    </div>
+                {% endif %}
+            </div>
 
-        <div class="message-container mt-3">
-            
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success shadow-sm border-0 animate__animated animate__fadeIn">
-                    {{ message }}
+            <div class="submission-zone p-4">
+                {# Flash Messages Styled as System Alerts #}
+                <div class="message-container">
+                    {% for message in app.flashes('success') %}
+                        <div class="terminal-alert success-alert mb-3">
+                            [SUCCESS]: {{ message }}
+                        </div>
+                    {% endfor %}
+
+                    {% for message in app.flashes('error') %}
+                        <div class="terminal-alert error-alert mb-3">
+                            [FAILURE]: {{ message }}
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
 
-        
-            {% for message in app.flashes('error') %}
-                <div class="alert alert-danger shadow-sm border-0 animate__animated animate__fadeIn">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        </div>
+                <section class="flag-submission">
+                    <form action="{{ path('submitFlag', {id: room.id}) }}" method="POST" class="matrix-input-group d-flex">
+                        <div class="input-prefix px-3 d-flex align-items-center">FLAG_INPUT:</div>
+                        <input type="text" name="submitted_flag" 
+                               class="form-control matrix-input flex-grow-1" 
+                               placeholder="CTF{hexagone_...}" required>
+                        <button class="matrix-btn px-4" type="submit">SUBMIT</button>
+                    </form>
+                </section>
+            </div>
+        </main>
 
-        <section class="flag-submission mt-4">
-            <form action="{{ path('submitFlag', {id: room.id}) }}" method="POST">
-                <div class="input-group">
-                    <input type="text" name="submitted_flag" class="form-control" placeholder="CTF{...}">
-                    <button class="btn btn-primary" type="submit">SUBMIT</button>
-                </div>
-            </form>
-        </section>
-    </main>
-
-    <footer class="room-actions">
-        <a href="{{ path('home') }}" class="back-btn">RETURN TO GRID</a>
-    </footer>
+        <footer class="matrix-card-footer p-3 border-top-terminal d-flex justify-content-between">
+            <a href="{{ path('home') }}" class="action-link view">[ ABORT_AND_EXIT ]</a>
+            <span class="terminal-subtitle small">LOC_COORD: 0x{{ room.id }}</span>
+        </footer>
+    </div>
 </div>
 {% endblock %}

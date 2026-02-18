@@ -1,39 +1,53 @@
 {% extends "base.html.twig" %}
 
-
 {% block body %}
 {% block navbar %}{{ parent() }}{% endblock %}
 
 <div class="login-wrapper">
-    <div class="login-card">
-        <h2 class="login-title">
-            <span style="color: #00ff9d;">&gt;</span> AUTH_REQUIRED
-        </h2>
+    <div class="matrix-card login-card-custom">
+        <div class="matrix-card-header text-center">
+            <h2 class="matrix-title h3 mb-0">
+                <span class="matrix-glow">></span> SYSTEM_AUTH
+            </h2>
+        </div>
 
+        <div class="card-body p-4">
+            {% if error %}
+                <div class="terminal-error-text mb-4 text-center blink" role="alert">
+                    [!] ACCESS_DENIED: {{ error.messageKey }}
+                </div>
+            {% endif %}
+            
+            <form method="post">
+                <div class="mb-4">
+                    <label for="username" class="terminal-label-sm">OPERATOR_ID</label>
+                    <input type="text" id="username" name="_username" 
+                           class="form-control matrix-input" 
+                           placeholder="Enter username..." 
+                           required autofocus>
+                </div>
 
-        {% if error %}
-            <div class="alert alert-danger" role="alert">{{ error.messageKey }}</div>
-        {% endif %}
-        
-        <form method="post">
-            <div class="mb-3">
-                <label for="username">Operator ID</label>
-                <input type="text" id="username" name="_username" class="form-control" placeholder="username..." required>
+                <div class="mb-4">
+                    <label for="password" class="terminal-label-sm">ACCESS_KEY</label>
+                    <input type="password" id="password" name="_password" 
+                           class="form-control matrix-input" 
+                           placeholder="••••••••" 
+                           required>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <button type="submit" class="matrix-btn w-100 py-3 mt-2">
+                    [ INITIALIZE_SESSION ]
+                </button>
+            </form>
+
+            <div class="text-center mt-4">
+                <h4 class="terminal-subtitle">
+                    NEW_NODE? <a href="{{ path('signin') }}" class="action-link view">REGISTER_ACCESS_POINT</a>
+                </h4>
             </div>
-
-            <div class="mb-3">
-                <label for="password">Access Key</label>
-                <input type="password" id="password" name="_password" class="form-control" placeholder="••••••••" required>
-            </div>
-
-             <button type="submit" class="ctf-btn">
-                Initialize Session
-            </button>
-        </form>
-
-        <h4 class="sign-up-text">
-            Don't have an account ? <a href="{{ path('signin') }}">Sign Up Here</a>
-        </h4>
+        </div>
     </div>
 </div>
 {% endblock %}

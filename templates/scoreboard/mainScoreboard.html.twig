@@ -2,48 +2,55 @@
 
 {% block body %}
 {% block navbar %}{{ parent() }}{% endblock %}
-<div class="container mt-5">
-    <h1 class="text-center mb-5"><span class="text-primary">&gt;</span> GLOBAL_LEADERBOARD</h1>
 
-    <div class="card bg-dark text-white border-primary shadow-lg">
-        <div class="card-body p-0">
-            {# templates/scoreboard/index.html.twig #}
+<div class="container scoreboard-container">
+    <div class="terminal-loader mb-5">
+        <h1 class="matrix-title text-center" data-text="GLOBAL_LEADERBOARD">
+            <span class="matrix-glow">></span> GLOBAL_LEADERBOARD
+        </h1>
+        <div class="terminal-bar"></div>
+    </div>
 
-<table class="table table-dark table-hover align-middle">
-    <thead>
-        <tr>
-            <th>Rank</th>
-            <th>User</th>
-            <th class="text-center">Rooms Finished</th>
-            <th class="text-center">Breakdown</th>
-            <th class="text-center">Score</th>
-            <th class="text-end">Last Solve</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for score in scores %}
-        <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ score.email }}</td>
-            <td class="text-center">
-                <span class="h5 mb-0 text-info">{{ score.totalSolved }}</span>
-            </td>
-            <td class="text-center">
-                <span class="badge bg-success">Easy: {{ score.easySolved|default(0) }}</span>
-                <span class="badge bg-warning text-dark">Medium: {{ score.mediumSolved|default(0) }}</span>
-                <span class="badge bg-danger">Hard: {{ score.hardSolved|default(0) }}</span>
-            </td>
-            <td class="text-center">
-                <span class="badge bg-primary px-3 py-2">{{ score.totalPoints }} PTS</span>
-            </td>
-            <td class="text-end text-muted small">
-                {{ score.lastSolve|date('d/M H:i') }}
-            </td>
-            
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <div class="matrix-card">
+        <div class="table-responsive">
+            <table class="table matrix-table align-middle">
+                <thead>
+                    <tr>
+                        <th class="rank-col"># RANK</th>
+                        <th>OPERATOR</th>
+                        <th class="text-center">NODES_CLEARED</th>
+                        <th class="text-center">CLEARANCE_BREAKDOWN</th>
+                        <th class="text-center">TOTAL_CREDITS</th>
+                        <th class="text-end">LAST_ACTIVITY</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for score in scores %}
+                    <tr class="matrix-row">
+                        <td class="rank-cell">
+                            <span class="rank-number">{{ loop.index }}</span>
+                        </td>
+                        <td class="user-cell">
+                            <span class="user-email">{{ score.email }}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="nodes-count">{{ score.totalSolved }}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="m-badge badge-easy">E:{{ score.easySolved|default(0) }}</span>
+                            <span class="m-badge badge-medium">M:{{ score.mediumSolved|default(0) }}</span>
+                            <span class="m-badge badge-hard">H:{{ score.hardSolved|default(0) }}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="points-display">{{ score.totalPoints }} <span class="small">XP</span></span>
+                        </td>
+                        <td class="text-end last-solve-cell">
+                            {{ score.lastSolve|date('d/M H:i') }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

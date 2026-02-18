@@ -1,72 +1,73 @@
 {% extends "base.html.twig" %}
 
-
-
 {% block body %}
 {% block navbar %}{{ parent() }}{% endblock %}
-<div class="directory-container">
-    <header class="directory-header">
-        <h1><span class="brand-accent">&gt;</span> USER_MANIFEST</h1>
-        <p class="text-secondary">Authorized personnel database access.</p>
+
+<div class="container directory-container">
+    <header class="directory-header mb-5">
+        <h1 class="matrix-glow"><span class="brand-accent">&gt;</span> USER_MANIFEST</h1>
+        <p class="terminal-subtitle">Authorized personnel database access // SECURED_CONNECTION</p>
     </header>
 
-    <nav class="search-bar-container mb-4">
-    <div class="input-group search-input-group">
-        <span class="input-group-text bg-dark text-success border-secondary">> SEARCH_QUERY:</span>
-        
-        <input type="text" 
-               id="terminalSearch" 
-               class="form-control bg-black text-success border-secondary" 
-               placeholder="Enter UID, Username, or Email...">
+    <div class="search-bar-container mb-4">
+        <div class="input-group matrix-input-group">
+            <span class="input-group-text terminal-label">> SEARCH_QUERY:</span>
+            <input type="text" 
+                   id="terminalSearch" 
+                   class="form-control matrix-input" 
+                   placeholder="Enter UID, Username, or Email..."
+                   autocomplete="off">
+        </div>
     </div>
-</nav>
     
-    <div class="table-responsive ctf-table-wrapper">
-        <table class="table ctf-table">
-            <thead>
-                <tr>
-                    <th><span class="th-glow">UID</span></th>
-                    <th>
-                        <span class="th-glow">USERNAME</span>
-                        <button id="sortUsername" class="btn btn-link p-0 text-success ms-2" style="text-decoration: none; font-size: 0.8rem;">
-                            <i>▴</i>
-                        </button>
-                    </th>
-                    <th>EMAIL</th>
-                    <th>ACCESS_LEVEL</th>
-                    <th class="text-end">OPERATIONS</th>
-                </tr>
-            </thead>
-            <tbody id="userTableBody">
-                {% for user in users %}
-                    <tr class="user-row"> 
-                        <td class="user-id">#{{ user.id|format('%03d') }}</td>
-                        <td class="user-name">{{ user.username }}</td>
-                        <td class="user-email">{{ user.email }}</td>
-                        <td>
-                            {% for role in user.roles %}
-                                <span class="role-badge">{{ role|replace({'ROLE_': ''}) }}</span>
-                            {% endfor %}
-                        </td>
-                        <td class="text-end">
-                            <a href="{{ path('profilePage', {'uuidUser': user.id}) }}" class="action-link">VIEW</a>
-                            <a href="{{ path('updateUser', {'uuidUser': user.id}) }}" class="action-link">MODIFY</a>
-                            <a href="{{ path('delUser', {'uuidUser': user.id}) }}" class="action-link">DELETE</a>
-                        </td>
-                    </tr>
-                {% else %}
+    <div class="matrix-card overflow-hidden">
+        <div class="table-responsive">
+            <table class="table matrix-table align-middle mb-0">
+                <thead>
                     <tr>
-                        <td colspan="4" class="text-center no-data">
-                            [!] NO_ENTRIES_FOUND_IN_DATABASE
-                        </td>
+                        <th class="ps-4">UID</th>
+                        <th>
+                            USERNAME
+                            <button id="sortUsername" class="sort-btn">
+                                <span>[SORT]</span>
+                            </button>
+                        </th>
+                        <th>EMAIL_ADDRESS</th>
+                        <th>CLEARANCE_LEVEL</th>
+                        <th class="text-end pe-4">SYSTEM_OPERATIONS</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="userTableBody">
+                    {% for user in users %}
+                        <tr class="user-row"> 
+                            <td class="user-id ps-4">#{{ user.id|format('%03d') }}</td>
+                            <td class="user-name fw-bold">{{ user.username }}</td>
+                            <td class="user-email">{{ user.email }}</td>
+                            <td>
+                                {% for role in user.roles %}
+                                    <span class="role-badge">{{ role|replace({'ROLE_': ''}) }}</span>
+                                {% endfor %}
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="action-group">
+                                    <a href="{{ path('profilePage', {'uuidUser': user.id}) }}" class="action-link view">VIEW</a>
+                                    <a href="{{ path('updateUser', {'uuidUser': user.id}) }}" class="action-link modify">MOD</a>
+                                    <a href="{{ path('delUser', {'uuidUser': user.id}) }}" class="action-link delete">DEL</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center no-data py-5">
+                                <span class="blink">[!] NO_ENTRIES_FOUND_IN_DATABASE</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-
-
 {% block js %}
     {{ parent() }}
     <script src="{{ asset('js/adminUserSearch.js') }}"></script>

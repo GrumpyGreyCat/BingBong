@@ -1,76 +1,73 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // 1. Grab elements
     const searchInput = document.getElementById('terminalSearch');
-    const tableBody = document.querySelector('#userTableBody') || document.querySelector('.userTableBody');
-    const rows = document.querySelectorAll('.user-row');
+    const tableBody = document.getElementById('userTableBody');
     const sortBtn = document.getElementById('sortUsername');
-    let ascending = true;
 
+    // Verification check
     if (!searchInput || !tableBody) {
-        console.error("Matrix System Error: Terminal components missing.");
+        console.warn("Matrix Debug: Missing DOM elements. Search or Table Body not found.");
         return;
     }
 
-   
+    // Capture initial rows
+    let rows = Array.from(tableBody.querySelectorAll('.user-row'));
+    let ascending = true;
 
-    if (sortBtn) {
-        sortBtn.addEventListener('click', function() {
-            const rows = Array.from(tableBody.querySelectorAll('.user-row'));
-
-            rows.sort((a, b) => {
-                const nameA = a.querySelector('.user-name').textContent.trim().toLowerCase();
-                const nameB = b.querySelector('.user-name').textContent.trim().toLowerCase();
-
-                if (ascending) {
-                    return nameA.localeCompare(nameB);
-                } else {
-                    return nameB.localeCompare(nameA);
-                }
-            });
-
-            ascending = !ascending;
-
-            rows.forEach(row => tableBody.appendChild(row));
-        });
-    }
-
+    // --- SEARCH LOGIC ---
     searchInput.addEventListener('input', function(e) {
         const query = e.target.value.toLowerCase().trim();
         let matchCount = 0;
 
-        tableBody.style.transition = 'opacity 0.15s ease';
-        tableBody.style.opacity = '0.3';
+        // Visual feedback: Dim the table while "processing"
+        tableBody.style.opacity = '0.5';
 
-        setTimeout(() => {
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    row.style.display = '';
-                    row.style.animation = "matrixFadeIn 0.3s ease forwards";
-                    matchCount++;
-                } else {
-                    row.style.display = 'none';
-                }
+        // Re-query rows in case they were re-sorted
+        const currentRows = tableBody.querySelectorAll('.user-row');
+
+        currentRows.forEach(row => {
+            const text = row.innerText.toLowerCase();
+            if (text.includes(query)) {
+                row.style.display = ''; // Show
+                matchCount++;
+            } else {
+                row.style.display = 'none'; // Hide
+            }
+        });
+
+        tableBody.style.opacity = '1';
+        handleNoResults(matchCount, tableBody, query);
+    });
+
+    // --- SORT LOGIC ---
+    if (sortBtn) {
+        sortBtn.addEventListener('click', function() {
+            const rowsToSort = Array.from(tableBody.querySelectorAll('.user-row'));
+            const label = sortBtn.querySelector('span');
+
+            rowsToSort.sort((a, b) => {
+                const valA = a.querySelector('.user-name').textContent.trim().toLowerCase();
+                const valB = b.querySelector('.user-name').textContent.trim().toLowerCase();
+                return ascending ? valA.localeCompare(valB) : valB.localeCompare(valA);
             });
 
-            tableBody.style.opacity = '1';
-            handleNoResults(matchCount, tableBody, query);
-        }, 150);
-    });
+            ascending = !ascending;
+            if (label) label.textContent = ascending ? '[SORT_ASC]' : '[SORT_DESC]';
+
+            // Re-inject sorted rows
+            rowsToSort.forEach(row => tableBody.appendChild(row));
+        });
+    }
 });
 
 function handleNoResults(count, container, query) {
     let emptyMsg = document.getElementById('matrix-empty-msg');
-    
     if (count === 0 && query !== "") {
         if (!emptyMsg) {
-            emptyMsg = document.createElement('tr');
-            emptyMsg.id = 'matrix-empty-msg';
-            emptyMsg.innerHTML = `
-                <td colspan="5" class="text-center py-5" style="color: #ff003c;">
-                    [!] ERROR: NO_RECORDS_MATCHING_CRITERIA<br>
-                    <span style="font-size: 0.8rem; opacity: 0.7;">SIGNAL_LOST...</span>
-                </td>`;
-            container.appendChild(emptyMsg);
+            const tr = document.createElement('tr');
+            tr.id = 'matrix-empty-msg';
+            tr.innerHTML = `<td colspan="5" class="text-center py-5 terminal-error-text">[!] NO_MATCHING_RECORDS_FOUND</td>`;
+            container.appendChild(tr);
         }
     } else if (emptyMsg) {
         emptyMsg.remove();

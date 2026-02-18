@@ -2,64 +2,74 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}ctf-hexagone{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        
         {% block stylesheets %}
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
-        {% endblock %}
-        {% block javascripts %}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
         {% endblock %}
 
-        
+        {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+        {% endblock %}
     </head>
-    <body>
-    {% block body %}
-        {% block navbar %}
-        <nav class="navbar navbar-expand-lg navbar-dark ctf-navbar fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="{{ path('home') }}">
-                <span class="brand-accent">&gt;</span> HEXAGONE_CTF
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="{{ path('home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('scoreboard') }}">Scoreboard</a></li>
+
+    <body class="ctf-body matrix-theme">
+    <div class="scanlines"></div>
+
+    {% block navbar %}
+    <nav class="navbar navbar-expand-lg fixed-top ctf-navbar terminal-border-bottom">
+        <div class="container">
+            <a class="navbar-brand mt-1" href="{{ path('home') }}">
+                <span class="matrix-glow">[</span> 
+                HEXAGONE_CTF 
+                <span class="matrix-glow">]</span>
+            </a>
+
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="toggler-icon-bar"></span>
+                <span class="toggler-icon-bar"></span>
+                <span class="toggler-icon-bar"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="{{ path('home') }}">Terminal</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="{{ path('scoreboard') }}">Scores</a></li>
                     {% if is_granted('ROLE_ADMIN') %}
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-uppercase" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Admin Panel
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-                            <li><a class="dropdown-item" href="{{ path('adminUserPanel') }}">Manage Users</a></li>
-                            <li><a class="dropdown-item" href="{{ path('roomManagement') }}">Manage Rooms</a></li>
+                            <li><a class="dropdown-item text-uppercase" href="{{ path('adminUserPanel') }}">Manage Users</a></li>
+                            <li><a class="dropdown-item text-uppercase" href="{{ path('roomManagement') }}">Manage Rooms</a></li>
                         </ul>
                     </li>
                     {% endif %}
+                    
                     {% if app.user %}
-                    <li class="nav-item"><a class="nav-link ctf-nav-btn" href="{{ path('profilePage', {'uuidUser': app.user.id}) }}">profile</a></li>
-                    <li class="nav-item"><a class="nav-link ctf-nav-btn" href="{{ path('logout') }}">logout</a></li>
+                        <li class="nav-item"><a class="nav-link matrix-btn ms-lg-3" href="{{ path('profilePage', {'uuidUser': app.user.id}) }}">MATRICULE</a></li>
+                        <li class="nav-item"><a class="nav-link matrix-btn ms-lg-3" href="{{ path('logout') }}">DISCONNECT</a></li>
                     {% else %}
-                    <li class="nav-item"><a class="nav-link ctf-nav-btn" href="{{ path('login') }}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link matrix-btn ms-lg-3" href="{{ path('login') }}">INITIALIZE</a></li>
                     {% endif %}
                 </ul>
-                </div>
             </div>
-        </nav>
-        {% endblock %}
-        {% block menu %}
-        {% endblock %}
-        {% block roomContent %}
-        {% endblock %}
-        {% block table %}
-        {% endblock %}
-        {% block js %}
-        {% endblock %}
+        </div>
+    </nav>
     {% endblock %}
+
+    <main class="ctf-main-content">
+            {% block body %}{% endblock %}
+            {% block menu %}{% endblock %}
+            {% block roomContent %}{% endblock %}
+            {% block table %}{% endblock %}
+    </main>
+
+        {% block js %}{% endblock %}
     </body>
 </html>

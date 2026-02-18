@@ -1,755 +1,929 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
-
-/* ================= * ==================== */
-/* Global Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box ;
-    font-family: "DM Mono";
+:root {
+    --matrix-green: #00FF41;
+    --matrix-dark-green: #003B00;
+    --matrix-bg: #030803;
+    --matrix-glow: rgba(0, 255, 65, 0.4);
+    --border-terminal: 1px solid var(--matrix-green);
 }
 
-/* Body & Background Layout */
-body {  
-  background-color: #0a0a0c;
-  background-image: 
-    linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px),
-    radial-gradient(circle at 50% 50%, #161b22 0%, #0a0a0c 100%);
-  background-size: 30px 30px, 30px 30px, 100% 100%;
-  
-  line-height: 1.6;
+body.ctf-body {
+    background-color: var(--matrix-bg);
+    color: var(--matrix-green);
+    font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+    text-shadow: 0 0 5px var(--matrix-glow);
+    overflow-x: hidden;
 }
 
-/* Selection Color */
-::selection {
-  background: rgba(0, 255, 157, 0.3);
-  color: #ffffff;
+/*
+==============================================================================================
+Navbar 
+==============================================================================================
+*/
+
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.1) 50%
+    );
+    background-size: 100% 4px;
+    z-index: 2000;
+    pointer-events: none;
+    opacity: 0.2;
 }
 
-/* ============= Main Page =================== */
-/* Menu button */
-
-
-
-.button-container {
-    margin-top: 15rem;
-}
-
-.link{
-    display: flex;
-    justify-content: center;
-    text-decoration: none;
-  
-}
-
-.level-selection {
-    /* Layout & Typography */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 28px;
-    font-weight: 600;
-    text-transform: uppercase;
-
-
-    /* Colors & Border */
-    color: #00ff9d;
-    background: #121212;
-    border: 1px solid rgba(0, 255, 157, 0.3);
-    border-radius: 4px;
-
-    /* The "Smooth" factor */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-.level-selection:hover {
-  color: #121212;
-  background: #00ff9d;
-  border-color: #00ff9d;
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(0, 255, 157, 0.4);
-}
-
-/* Custom CTF Navbar */
 .ctf-navbar {
-  background: rgba(10, 10, 12, 0.8) !important;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 255, 157, 0.1);
-  padding: 15px 0;
-  transition: all 0.3s ease;
+    background-color: rgba(3, 8, 3, 0.9);
+    border-bottom: 2px solid var(--matrix-green);
+    box-shadow: 0 5px 20px rgba(0, 255, 65, 0.1);
+    backdrop-filter: blur(5px);
 }
 
-/* Brand/Logo Styling */
 .navbar-brand {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #fff !important;
+    color: var(--matrix-green) !important;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
 }
 
-.brand-accent {
-  color: #00ff9d; 
-  margin-right: 5px;
-}
-
-/* Nav Links */
-.ctf-navbar .nav-link {
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7) !important;
-  margin: 0 10px;
-  transition: color 0.2s ease;
-}
-
-.ctf-navbar .nav-link:hover, 
-.ctf-navbar .nav-link.active {
-  color: #00ff9d !important;
-}
-
-/* Special styling for a 'Login' button in the nav */
-.ctf-nav-btn {
-  border: 1px solid #00ff9d;
-  border-radius: 4px;
-  padding: 6px 18px !important;
-  color: #00ff9d !important;
-  margin-left: 15px !important;
-}
-
-.ctf-nav-btn:hover {
-  background: rgba(0, 255, 157, 0.1);
-  box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
-}
-
-/* Mobile Toggle - Make it green */
-.navbar-toggler {
-  border: none;
-}
-.navbar-toggler-icon {
-  filter: invert(62%) sepia(94%) saturate(451%) hue-rotate(106deg) brightness(101%) contrast(101%);
-}
-
-/* =========== LoginPage ============== */
-/* Login Container - Centering the form */
-.login-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 100px);
-    padding: 20px;
-}
-
-.login-card {
-    background: rgba(18, 18, 20, 0.8);
-    border: 1px solid rgba(0, 255, 157, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 40px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.signin-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 100px);
-    padding: 20px;
-}
-
-.signin-card {
-    background: rgba(18, 18, 20, 0.8);
-    border: 1px solid rgba(0, 255, 157, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 40px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-/* Styling Twig Form Rows */
-.mb-3, .form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    color: #00ff9d;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-/* The Inputs  */
-input[type="text"], 
-input[type="password"], 
-input[type="email"], 
-.form-control {
-    width: 100%;
-    padding: 12px 16px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
+.nav-link {
+    color: var(--matrix-green) !important;
+    opacity: 0.7;
     transition: all 0.2s ease;
 }
 
-input:focus {
-    outline: none;
-    border-color: #00ff9d;
-    background: rgba(0, 255, 157, 0.05);
-    box-shadow: 0 0 10px rgba(0, 255, 157, 0.1);
-}
-
-/* Button Integration */
-.login-card button[type="submit"] {
-    width: 100%;
-    margin-top: 10px;
-    background: #00ff9d;
-    color: #0a0a0c;
-    border: none;
-    padding: 14px;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: 0.3s;
-}
-
-.login-card button[type="submit"]:hover {
-    background: #00cc7e;
-    box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
-    transform: translateY(-2px);
-}
-
-.login-title {
-font-family: 'JetBrains Mono';
- margin-bottom: 30px;
-  text-align: center;
-overflow: hidden;
-color: #fff;
-}
-
-.signin-card button[type="submit"] {
-    width: 100%;
-    margin-top: 10px;
-    background: #00ff9d;
-    color: #0a0a0c;
-    border: none;
-    padding: 14px;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: 0.3s;
-}
-
-.signin-card button[type="submit"]:hover {
-    background: #00cc7e;
-    box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
-    transform: translateY(-2px);
-}
-
-.signin-title {
-font-family: 'JetBrains Mono';
- margin-bottom: 30px;
-  text-align: center;
-overflow: hidden;
-color: #fff;
-}
-
-.sign-up-text {
-    overflow: hidden;
-    margin-top: 2rem;
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    color: #00ff9d;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-    text-decoration: none;   
+.nav-link:hover, .nav-link.active {
+    opacity: 1;
+    text-shadow: 0 0 10px var(--matrix-green);
 }
 
 
-/* ========= Level Page ========= */
-/* 1. Page Wrapper */
-.level-selector-page {
-    width: 100%;
-    overflow: hidden; /* Total removal of page scrollbars */
-    display: flex;
-    flex-direction: column;
+.matrix-btn {
+    border: 1px solid var(--matrix-green) !important;
+    color: var(--matrix-green) !important;
+    border-radius: 0;
+    padding: 0.5rem 1.5rem !important;
     background: transparent;
-}
-
-/* 2. Header Section - Positioned under Navbar */
-.level-header {
-    margin-top: 5rem; /* Space for your fixed navbar */
-    flex: 0 0 auto;
-    text-align: center;
-    padding-bottom: 2rem;
-}
-
-.level-header h1 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 2rem;
-    color: #ffffff;
-    position: relative;
-    display: inline-block;
-    overflow: hidden; /* Clips internal title animations */
-    padding: 0 15px 10px;
-}
-
-/* 3. The Fixed Grid (4 or 6 per row) */
-.room-grid {
-    flex: 1 1 auto;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 1.5rem;
-    padding: 0 10%; /* Side padding to keep the grid centered and "pro" */
-    overflow: hidden; /* Keeps all button animations contained in the container */
-    align-content: start;
-    margin-bottom: 2rem;
-}
-
-/* 4. The Square Room Button */
-.room-btn {
-    aspect-ratio: 1 / 1;
-    background: rgba(18, 18, 20, 0.8);
-    border: 1px solid rgba(0, 255, 157, 0.2);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none !important;
-    position: relative;
-    overflow: hidden; /* CRITICAL: Clips the glint animation at every frame */
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    margin-top: 1rem;
-}
-
-/* Content Styling */
-.room-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 2rem;
-    font-weight: 800;
-    color: #ffffff;
-}
-
-.room-meta {
-    font-size: 0.65rem;
-    letter-spacing: 1px;
-    color: rgba(0, 255, 157, 0.6);
+    transition: all 0.3s;
     text-transform: uppercase;
-}
-
-/* 5. Contained Animations */
-
-/* Glint Sweep Effect */
-.room-btn::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(0, 255, 157, 0.2),
-        transparent
-    );
-    transform: skewX(-20deg);
-    transition: 0.6s;
-    pointer-events: none;
-}
-
-.room-btn:hover {
-    transform: translateY(-5px);
-    border-color: #00ff9d;
-    background: rgba(0, 255, 157, 0.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-}
-
-.room-btn:hover::before {
-    left: 150%; /* Sweep moves across but is only visible inside the button */
-}
-
-/* Static Overlay Effect */
-.room-btn::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-    background-size: 100% 4px;
-    pointer-events: none;
-    opacity: 0.3;
-}
-
-/* Tablet/Mobile adjustment to keep the "Fixed" look usable */
-@media (max-width: 992px) {
-    .room-grid { grid-template-columns: repeat(4, 1fr); padding: 0 5%; }
-}
-@media (max-width: 576px) {
-    .room-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-
-/* ============ room-content ================ */
-
-/* 1. Main Container Setup */
-.room-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 5rem;
-}
-
-/* 2. Room Header (Difficulty Badge & Title) */
-.room-header {
-    margin-top: 6rem; /* Positioned below navbar */
-    text-align: center;
-    flex: 0 0 auto;
-}
-
-.room-header .badge {
-    background: rgba(0, 255, 157, 0.1);
-    color: #00ff9d;
-    border: 1px solid rgba(0, 255, 157, 0.3);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    padding: 5px 12px;
-    letter-spacing: 2px;
-    margin-bottom: 1rem;
-    display: inline-block;
-}
-
-.room-header h1 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 2.5rem;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-}
-
-/* 3. The Challenge Content (Fixed Width Rectangle) */
-.challenge-container {
-    width: 900px; /* Fixed width for the "Pro" terminal look */
-    max-width: 95vw; /* Responsive fallback for smaller screens */
-    margin-top: 2rem;
-    background: rgba(18, 18, 20, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-top: 2px solid #00ff9d; /* Accent top border */
-    border-radius: 4px;
-    backdrop-filter: blur(10px);
-    overflow: hidden; /* Clips internal scanlines/animations */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-}
-
-.puzzle-content {
-    padding: 40px;
-    font-family: 'Inter', sans-serif;
-    color: #cbd5e0;
-    min-height: 400px;
-    position: relative;
-}
-
-/* Subtle background grid inside the puzzle area */
-.puzzle-content::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.02) 1px, transparent 0);
-    background-size: 24px 24px;
-    pointer-events: none;
-}
-
-/* 4. Footer Actions */
-.room-actions {
-    margin-top: 3rem;
-    text-align: center;
-    overflow-y: hidden;
-}
-
-.back-btn {
-    font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.4);
-    text-decoration: none;
-    padding: 10px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.back-btn:hover {
-    color: #00ff9d;
-    border-color: #00ff9d;
-    background: rgba(0, 255, 157, 0.05);
+.matrix-btn:hover {
+    background-color: var(--matrix-green) !important;
+    color: var(--matrix-bg) !important;
+    box-shadow: 0 0 25px var(--matrix-green);
 }
 
-/* 5. Logic for the included Challenge Content */
-/* This ensures anything inside your challenge_file matches the theme */
-.puzzle-content h2, .puzzle-content h3 {
-    color: #fff;
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 1.5rem;
-    overflow-y: hidden;
+.dropdown-menu {
+    background-color: var(--matrix-bg);
+    border: 1px solid var(--matrix-green);
 }
 
-.puzzle-content code {
-    background: #000;
-    color: #00ff9d;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: 'JetBrains Mono', monospace;
-}
-/* Mock Room Specific Styling */
-.mock-challenge {
-    position: relative;
+.dropdown-item {
+    color: var(--matrix-green);
 }
 
-/* Terminal Look for Code Snippets */
-.terminal-box {
-    background: #050505;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    font-family: 'JetBrains Mono', monospace;
+.dropdown-item:hover {
+    background-color: var(--matrix-green);
+    color: var(--matrix-bg);
 }
 
-.terminal-header {
-    background: #1a1a1a;
-    padding: 8px 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    display: flex;
-    align-items: center;
-}
-
-.terminal-header .dot {
-    height: 8px;
-    width: 8px;
-    background: #333;
-    border-radius: 50%;
-    margin-right: 6px;
-}
-
-.terminal-title {
-    font-size: 0.7rem;
-    color: #666;
-    margin-left: 10px;
-    letter-spacing: 1px;
-}
-
-.terminal-body {
-    padding: 15px;
-    font-size: 0.85rem;
-    color: #a0a0a0;
-}
-
-/* Flag Form Styling */
-.flag-form .input-group {
-    background: transparent;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.flag-input {
-    background: rgba(0, 0, 0, 0.5) !important;
-    border: 1px solid rgba(0, 255, 157, 0.3) !important;
-    border-left: none !important;
-    border-right: none !important;
-    color: #00ff9d !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-weight: bold;
-}
-
-.flag-input::placeholder {
-    color: rgba(0, 255, 157, 0.2);
-}
-
-.flag-input:focus {
-    box-shadow: 0 0 15px rgba(0, 255, 157, 0.1) !important;
-    background: rgba(0, 255, 157, 0.02) !important;
-}
-
-/* Reusing your ctf-btn logic from earlier */
-.flag-section .ctf-btn {
-    padding: 0 30px;
-    height: 48px;
-    white-space: nowrap;
+.ctf-main-content {
+    padding-top: 120px;
 }
 
 
-/* ======================== Admin - userPanel  ======================== */
-
-
-/* 2. Container & Header */
-.directory-container {
-    max-width: 1200px;
-    margin: 8rem auto 4rem;
-    padding: 0 2rem;
+@keyframes flicker {
+    0% { opacity: 0.9; }
+    5% { opacity: 0.4; }
+    10% { opacity: 0.9; }
+    100% { opacity: 1; }
 }
 
-.directory-header {
-    text-align: center; /* Matching your centered "EASY_ROOMS" title */
-    margin-bottom: 4rem;
+.navbar-brand {
+    animation: flicker 4s infinite linear;
 }
 
-.directory-header h1 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 2.2rem;
-    letter-spacing: 4px;
-    color: #ffffff;
-    text-transform: uppercase;
-    overflow-y: hidden;
-}
-
-.directory-header p {
-    font-family: 'JetBrains Mono', monospace;
-    color: #52525b;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-}
-
-/* 3. The Seamless Table Wrapper */
-.ctf-table-wrapper {
-    background: rgba(13, 15, 18, 0.9); /* Translucent obsidian */
-    border: 1px solid rgba(255, 255, 255, 0.05); /* Very thin "pro" border */
-    border-radius: 4px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-}
-
-.ctf-table {
-    margin-bottom: 0;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-/* 4. Unified TH & TD (No background difference) */
-.ctf-table th, 
-.ctf-table td {
-    padding: 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03); /* Faint dividers */
-    background: transparent;
-    vertical-align: middle;
-}
-
-/* High Contrast Headers */
-.ctf-table th {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* Data Styling */
-.user-id {
-    font-family: 'JetBrains Mono', monospace;
-    color: #ffffff !important; 
-    font-size: 1.2rem;
-}
-
-.user-email, .user-name {
-    font-family: 'Inter', sans-serif;
-    color: #a1a1aa !important; /* Softer grey for sub-data */
-}
-
-/* 5. Status/Role Badge (The neon accent) */
-.role-badge {
-    display: inline-block;
-    padding: 4px 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
-    color: #00ff9d; /* The green from your "ACTIVE" text */
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* 6. Action Button (The "Logout" style) */
-.action-link {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: #00ff9d;
-    text-decoration: none;
-    padding: 8px 20px;
-    border: 1px solid #00ff9d; /* Matches the green box in your nav */
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-.action-link:hover {
-    background: rgba(0, 255, 157, 0.1);
-    box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
-}
-
-/* 7. Row Hover Awakening */
-.ctf-table tbody tr {
-    transition: background 0.3s ease;
-}
-
-.ctf-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.02); /* Very subtle "lift" */
-}
-/* Container styling to match the dark grid background */
-.search-bar-container {
-    background-color: #0d0d0d;
-    padding: 20px;
-    border-bottom: 1px solid #1a1a1a;
-    margin-bottom: 2rem;
-}
-
-/* The Search Input Group */
-.search-input-group {
-    background: #000 !important;
-    border: 1px solid #1a1a1a !important; /* Subtle border like your table rows */
-    border-radius: 2px !important;
-    transition: border-color 0.3s ease;
-}
-
-.search-input-group:focus-within {
-    border-color: #00ff41 !important; /* Glows only on focus */
-}
-
-/* The "> SEARCH_QUERY:" prefix */
-.input-group-text {
-    background: transparent !important;
-    color: #ffffff !important;
-    border: none !important;
-    font-family: 'Consolas', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0.8;
-}
-
-/* The Input Field */
-#terminalSearch {
-    background: transparent !important;
-    color: #ffffff !important;
-    border: none !important;
-    font-family: 'Consolas', monospace;
-    font-size: 0.9rem;
-}
-
-#terminalSearch:focus {
+.custom-toggler {
+    border: 1px solid var(--matrix-green) !important;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0;
+    outline: none !important;
     box-shadow: none !important;
 }
 
-#terminalSearch::placeholder {
-    color: #444;
-    font-style: normal;
+.toggler-icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--matrix-green);
+    margin: 4px 0;
+    transition: all 0.2s;
+    box-shadow: 0 0 5px var(--matrix-green);
+}
+
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: var(--matrix-bg);
+        border: 1px solid var(--matrix-green);
+        margin-top: 1rem;
+        padding: 1rem;
+        box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2);
+    }
+
+    .nav-link {
+        padding: 10px 0 !important;
+        border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+    }
+
+    .matrix-btn {
+        margin-top: 15px;
+        width: 100%;
+    }
+}
+
+.dropdown-menu-dark {
+    border-color: var(--matrix-green) !important;
+}
+
+/*
+==============================================================================================
+Main Page 
+==============================================================================================
+*/
+.menu-selection-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+}
+
+.terminal-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-align: center;
+    color: var(--matrix-green);
+    border-right: 12px solid var(--matrix-green);
+    padding-right: 10px;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+.matrix-level-btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none !important;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: var(--matrix-green);
+    background: rgba(0, 59, 0, 0.1);
+    border: 1px solid var(--matrix-green);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.btn-bracket {
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.matrix-level-btn.easy { border-color: #00FF41; color: #00FF41; }
+.matrix-level-btn.medium { border-color: #FFB000; color: #FFB000; } /* Amber terminal color */
+.matrix-level-btn.hard { border-color: #FF3E3E; color: #FF3E3E; }   /* Alert Red */
+
+.matrix-level-btn:hover {
+    background: rgba(0, 255, 65, 0.1);
+    box-shadow: 0 0 20px currentColor;
+    transform: scale(1.05);
+}
+
+.matrix-level-btn:hover .btn-bracket {
+    opacity: 1;
+}
+
+.matrix-level-btn::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 255, 65, 0.2),
+        transparent
+    );
+    animation: scan-btn 3s infinite linear;
+}
+
+@keyframes scan-btn {
+    0% { top: -100%; }
+    100% { top: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--matrix-green); }
+}
+
+/*
+==============================================================================================
+Scoreboard, Admin User, Admin Room
+==============================================================================================
+*/
+
+
+.scoreboard-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.matrix-title {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 8px;
+    font-weight: 800;
+    color: var(--matrix-green);
+    text-transform: uppercase;
+}
+
+.terminal-bar {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--matrix-green), transparent);
+    width: 60%;
+    margin: 10px auto;
+    box-shadow: 0 0 10px var(--matrix-green);
+}
+
+
+.matrix-card {
+    background: rgba(3, 8, 3, 0.9) !important;
+    border: 1px solid var(--matrix-green);
+    overflow: hidden;
+}
+.matrix-table, 
+.matrix-table > :not(caption) > * > * {
+    background-color: transparent !important;
+    color: var(--matrix-green) !important;
+    border-bottom-color: rgba(0, 255, 65, 0.2) !important;
+    box-shadow: none !important;
+}
+
+.matrix-table thead th {
+    background: rgba(0, 255, 65, 0.1);
+    border-bottom: 2px solid var(--matrix-green) !important;
+    color: var(--matrix-green);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    padding: 15px;
+}
+
+.matrix-row:hover td {
+    background-color: rgba(0, 255, 65, 0.1) !important;
+    color: #fff !important;
+}
+
+.table-hover > tbody > tr:hover > * {
+    --bs-table-accent-bg: rgba(0, 255, 65, 0.1) !important;
+    color: #fff !important;
+}
+
+.rank-number {
+    font-weight: bold;
+    color: #fff;
+    background: var(--matrix-dark-green);
+    padding: 2px 8px;
+    border-radius: 2px;
+}
+
+.user-email {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.nodes-count {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 10px var(--matrix-green);
+}
+
+.points-display {
+    border: 1px solid var(--matrix-green);
+    padding: 5px 15px;
+    font-weight: bold;
+    background: rgba(0, 255, 65, 0.05);
+}
+
+.m-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin: 0 2px;
+    border: 1px solid transparent;
+}
+
+.badge-easy { border-color: var(--matrix-green); color: var(--matrix-green); }
+.badge-medium { border-color: #FFB000; color: #FFB000; }
+.badge-hard { border-color: #FF3E3E; color: #FF3E3E; }
+
+.last-solve-cell {
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0.6;
+    font-size: 0.8rem;
+}
+
+
+.directory-container {
+    padding-top: 40px;
+}
+
+.terminal-subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--matrix-dark-green);
+    letter-spacing: 1px;
+}
+
+
+.matrix-input-group {
+    border: 1px solid var(--matrix-green);
+    background: var(--matrix-bg);
+}
+
+.terminal-label {
+    background: rgba(0, 255, 65, 0.1) !important;
+    color: var(--matrix-green) !important;
+    border: none !important;
+    border-right: 1px solid var(--matrix-green) !important;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+}
+
+.matrix-input {
+    background: transparent !important;
+    border: none !important;
+    color: var(--matrix-green) !important;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.matrix-input:focus {
+    box-shadow: inset 0 0 10px var(--matrix-glow);
+    outline: none;
+}
+
+
+.user-id {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--matrix-green);
+    opacity: 0.6;
+}
+
+.role-badge {
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid var(--matrix-green);
+    color: var(--matrix-green);
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    margin-right: 5px;
+}
+
+
+.sort-btn {
+    background: none;
+    border: none;
+    color: var(--matrix-green);
+    font-size: 0.7rem;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.sort-btn:hover { opacity: 1; }
+
+.action-link {
+    text-decoration: none !important;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    margin-left: 5px;
+}
+
+.action-link.view { color: var(--matrix-green); }
+.action-link.modify { color: #FFB000; }
+.action-link.delete { color: #FF3E3E; }
+
+.action-link:hover {
+    border: 1px solid currentColor;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 8px currentColor;
+}
+
+
+.blink {
+    animation: blinker 1s linear infinite;
+    color: #FF3E3E;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+
+@keyframes matrixFadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(-5px); 
+        background: rgba(0, 255, 65, 0.2); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+        background: transparent; 
+    }
+}
+
+
+.terminal-error-text {
+    color: #FF3E3E;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 62, 62, 0.5);
+}
+
+
+.user-row {
+    transition: background 0.3s ease;
+}
+
+.nodes-count {
+    color: #fff;
+    text-shadow: 0 0 8px var(--matrix-green);
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(0, 255, 65, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.user-email.small {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--matrix-green);
+    font-size: 0.75rem;
+}
+
+.action-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.badge-easy { border-color: var(--matrix-green); color: var(--matrix-green); }
+.badge-medium { border-color: #FFB000; color: #FFB000; }
+.badge-hard { border-color: #FF3E3E; color: #FF3E3E; }
+
+/*
+==============================================================================================
+Room Creation Page
+==============================================================================================
+*/
+
+
+.matrix-card-header {
+    background: rgba(0, 255, 65, 0.05);
+    border-bottom: 1px solid var(--matrix-green);
+    padding: 1.5rem;
+}
+
+
+.terminal-label-sm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--matrix-green);
+    margin-bottom: 8px;
+    display: block;
+    letter-spacing: 1px;
+}
+
+
+.matrix-input {
+    background: rgba(3, 8, 3, 0.8) !important;
+    border: 1px solid var(--matrix-dark-green) !important;
+    border-radius: 0 !important;
+    color: var(--matrix-green) !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    padding: 12px !important;
+    transition: all 0.3s ease !important;
+}
+
+.matrix-input:focus {
+    border-color: var(--matrix-green) !important;
+    box-shadow: 0 0 15px var(--matrix-glow) !important;
+    outline: none;
+}
+
+
+.matrix-input[type="file"] {
+    font-size: 0.8rem;
+    padding: 8px !important;
+}
+
+
+.matrix-select option {
+    background: var(--matrix-bg);
+    color: var(--matrix-green);
+}
+
+.error-text {
+    color: #FF3E3E;
+    font-size: 0.75rem;
+    margin-top: 5px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.border-top-terminal {
+    border-top: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.matrix-form-footer .action-link.delete {
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+.matrix-form-footer .action-link.delete:hover {
+    opacity: 1;
+    color: #FF3E3E;
+    border-color: #FF3E3E;
+}
+
+/*
+==============================================================================================
+Login User
+==============================================================================================
+*/
+
+.login-wrapper {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+.matrix-title, h2.login-title, h2.signin-title {
+    width: 100%;
+    display: block;
+    overflow: visible; 
+    line-height: 1.4; 
+    margin-bottom: 1.5rem;
+    word-wrap: break-word; 
+    text-align: center;
+    letter-spacing: 3px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.matrix-card-header {
+    min-height: auto;
+    padding: 2rem 1rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card-custom {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(3, 8, 3, 0.95) !important;
+    border: 2px solid var(--matrix-green) !important;
+    box-shadow: 0 0 50px rgba(0, 255, 65, 0.15);
+}
+
+
+.matrix-input::placeholder {
+    color: var(--matrix-dark-green);
+    opacity: 0.5;
+}
+
+
+.terminal-error-text {
+    background: rgba(255, 62, 62, 0.1);
+    border: 1px solid #FF3E3E;
+    padding: 10px;
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+
+.terminal-subtitle a {
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.signin-wrapper {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+
+.error-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+}
+
+.error-text li {
+    color: #FF3E3E;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+/*
+==============================================================================================
+Matricule
+==============================================================================================
+*/
+
+
+.profile-frame {
+    position: relative;
+    display: inline-block;
+    border: 2px solid var(--matrix-green);
+    padding: 5px;
+    background: var(--matrix-bg);
+    box-shadow: 0 0 20px var(--matrix-glow);
+}
+
+.terminal-avatar {
+    border: 1px solid var(--matrix-dark-green);
+    filter: grayscale(1) contrast(1.2) brightness(0.8);
+}
+
+.profile-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 65, 0.1) 0px,
+        rgba(0, 255, 65, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+}
+
+
+.active-signal {
+    background: rgba(0, 255, 65, 0.2);
+    color: var(--matrix-green);
+    border: 1px solid var(--matrix-green);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 4px 12px;
+    animation: flicker 2s infinite;
+}
+
+
+.borderless-table td, .borderless-table th {
+    border: none !important;
+    background: transparent !important;
+    padding: 12px 5px !important;
+}
+
+.terminal-header-sm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    color: var(--matrix-green);
+    border-bottom: 1px solid var(--matrix-dark-green);
+    padding-bottom: 10px;
+}
+
+
+.matrix-form .mb-4 {
+    position: relative;
+}
+
+.matrix-btn {
+    animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+    0% { box-shadow: 0 0 5px var(--matrix-glow); }
+    50% { box-shadow: 0 0 15px var(--matrix-glow); }
+    100% { box-shadow: 0 0 5px var(--matrix-glow); }
+}
+.matrix-input, 
+.matrix-input:focus,
+input[type="password"].form-control {
+    background-color: rgba(3, 8, 3, 0.9) !important;
+    background-image: none !important; 
+    color: var(--matrix-green) !important;
+    border: 1px solid var(--matrix-dark-green) !important;
+    box-shadow: none;
+}
+
+
+.matrix-form div[id*="password"] {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.matrix-form div[id*="password"] label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--matrix-green);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.matrix-input {
+    width: 100% !important;
+    display: block;
+    text-align: left;
+}
+
+/*
+==============================================================================================
+Room Selection
+==============================================================================================
+*/
+
+
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+
+.node-card {
+    position: relative;
+    background: rgba(0, 20, 0, 0.4);
+    border: 1px solid var(--matrix-dark-green);
+    padding: 20px;
+    text-decoration: none !important;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 180px;
+}
+
+
+.active-node {
+    border-color: var(--matrix-green);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.05);
+}
+
+.active-node:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px var(--matrix-glow);
+    background: rgba(0, 255, 65, 0.1);
+    border-color: #fff;
+}
+
+
+.locked-node {
+    opacity: 0.4;
+    filter: grayscale(1);
+    border-style: dashed;
+    cursor: not-allowed;
+}
+
+.node-label {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--matrix-green);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.room-num {
+    font-size: 3rem;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+    color: #fff;
+    margin: 15px 0;
+    text-shadow: 0 0 10px var(--matrix-green);
+}
+
+.room-meta {
+    font-size: 0.7rem;
+    color: var(--matrix-green);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.node-scanner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--matrix-green);
+    box-shadow: 0 0 15px var(--matrix-green);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.active-node:hover .node-scanner {
+    animation: scan-node 1.5s infinite;
+    opacity: 1;
+}
+
+@keyframes scan-node {
+    0% { top: 0%; }
+    100% { top: 100%; }
+}
+
+.node-status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--matrix-green);
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 8px var(--matrix-green);
+    animation: flicker 1.5s infinite;
+}
+
+/*
+==============================================================================================
+Room
+==============================================================================================
+*/
+
+.challenge-card {
+    border-width: 2px !important;
+    box-shadow: 0 0 40px rgba(0, 255, 65, 0.1);
+}
+
+.puzzle-wrapper {
+    background: #000;
+    border-bottom: 1px solid var(--matrix-dark-green);
+    position: relative;
+}
+
+.terminal-iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    display: block;
+    filter: invert(0.9) hue-rotate(150deg) brightness(0.8) contrast(1.2); 
+}
+
+.submission-zone {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.input-prefix {
+    background: rgba(0, 255, 65, 0.1);
+    color: var(--matrix-green);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    border-right: 1px solid var(--matrix-green);
+}
+
+.terminal-alert {
+    font-family: 'JetBrains Mono', monospace;
+    padding: 10px 15px;
+    border: 1px solid;
+    font-size: 0.9rem;
+}
+
+.success-alert {
+    background: rgba(0, 255, 65, 0.1);
+    color: var(--matrix-green);
+    border-color: var(--matrix-green);
+}
+
+.error-alert {
+    background: rgba(255, 62, 62, 0.1);
+    color: #FF3E3E;
+    border-color: #FF3E3E;
+}
+
+.system-status {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 1px;
 }
