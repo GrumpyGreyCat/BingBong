@@ -18,7 +18,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/logout', name: 'logout')]
-    public function logout(AuthenticationUtils $utils)
+    public function logout()
     {
         
     }

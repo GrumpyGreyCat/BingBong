@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
-
+        
         $admin = new User();
         $admin->setUserName('admin');
         $admin->setEmail('admin@example.com');
