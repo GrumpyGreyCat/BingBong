@@ -32,7 +32,7 @@
 
 ### Backend
 * **Framework**: Symfony CLI 5.16.1
-* **Language**: 8.4.1
+* **Language**: PHP 8.4.1
 * **Database**: Doctrine ORM - Connected to a Docker image of _postgres:16-alpine_
 
 ### Frontend
