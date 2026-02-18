@@ -2,10 +2,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('terminalSearch');
     const tableBody = document.querySelector('#userTableBody') || document.querySelector('.userTableBody');
     const rows = document.querySelectorAll('.user-row');
+    const sortBtn = document.getElementById('sortUsername');
+    let ascending = true;
 
     if (!searchInput || !tableBody) {
         console.error("Matrix System Error: Terminal components missing.");
         return;
+    }
+
+   
+
+    if (sortBtn) {
+        sortBtn.addEventListener('click', function() {
+            const rows = Array.from(tableBody.querySelectorAll('.user-row'));
+
+            rows.sort((a, b) => {
+                const nameA = a.querySelector('.user-name').textContent.trim().toLowerCase();
+                const nameB = b.querySelector('.user-name').textContent.trim().toLowerCase();
+
+                if (ascending) {
+                    return nameA.localeCompare(nameB);
+                } else {
+                    return nameB.localeCompare(nameA);
+                }
+            });
+
+            ascending = !ascending;
+
+            rows.forEach(row => tableBody.appendChild(row));
+        });
     }
 
     searchInput.addEventListener('input', function(e) {
