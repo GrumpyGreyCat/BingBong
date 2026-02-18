@@ -2,45 +2,33 @@
 
 {% block body %}
 {% block navbar %}{{ parent() }}{% endblock %}
-<div class="container text-center mt-5">
-    <div class="error-wrapper p-5" style="background: #1a0000; border: 2px solid #ff4444; border-radius: 10px; box-shadow: 0 0 30px rgba(255,0,0,0.4);">
+
+<div class="container directory-container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="matrix-card forbidden-card text-center p-5">
+
+
+        <h1 class="display-4 terminal-error-text fw-bold mb-0">403_ACCESS_DENIED</h1>
+        <h2 class="matrix-title mt-0 mb-4">
+            <span class="matrix-glow">></span> INSUFFICIENT_CLEARANCE
+        </h2>
         
-        <div class="mb-4">
-            <i class="fas fa-user-shield text-danger" style="font-size: 5rem;"></i>
+        <div class="terminal-text-block mb-4 text-start">
+            <p class="mb-1 text-danger fw-bold">[!] ALARM: UNAUTHORIZED_ACCESS_INTERCEPTED</p>
+            <p class="mb-1 small">[ OPERATOR_ID: {{ app.user ? app.user.userIdentifier : 'ANONYMOUS_GUEST' }} ]</p>
+            <p class="mb-1 small">[ LOG_ACTION: SECURITY_OVERRIDE_RECORDED ]</p>
+            <p class="matrix-glow small">[ RECOMMENDATION: DISCONNECT_FROM_SECTOR ]</p>
         </div>
 
-        <h1 class="display-3 text-danger fw-bold">403_FORBIDDEN</h1>
-        <h2 class="text-white mb-4">&gt; PERMISSION_INSUFFICIENT</h2>
-        
-        <div class="terminal-text mb-4" style="font-family: 'Courier New', monospace; color: #ff8888; background: #000; padding: 20px; border-radius: 5px; border-left: 5px solid #ff4444;">
-            <p class="mb-1">[!] ALARM: Unauthorized access attempt detected.</p>
-            <p class="mb-1">[!] Identity: {{ app.user ? app.user.userIdentifier : 'ANONYMOUS_GUEST' }}</p>
-            <p class="mb-1">[!] Action: Security logs updated.</p>
-            <p>[!] Recommendation: Disconnect immediately.</p>
-        </div>
+        <p class="terminal-subtitle mb-5">Current credentials do not possess the decryption keys for this sector.</p>
 
-        <p class="text-muted mb-5">Your current clearance level does not allow access to this encrypted sector.</p>
-
-        <div class="d-flex justify-content-center gap-3">
-            <a href="{{ path('home') }}" class="btn btn-danger btn-lg px-5">
-                <i class="fas fa-home me-2"></i> ESCAPE_TO_SAFETY
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 pt-4 border-top-terminal">
+            <a href="{{ path('home') }}" class="matrix-btn">
+                [ ESCAPE_TO_SAFETY ]
             </a>
-            <a href="{{ path('login') }}" class="btn btn-outline-light btn-lg px-5">
-                <i class="fas fa-key me-2"></i> RE_AUTHENTICATE
+            <a href="{{ path('login') }}" class="action-link modify pt-2">
+                [ RE_AUTHENTICATE_IDENTITY ]
             </a>
         </div>
     </div>
 </div>
-
-<style>
-    body { background-color: #000 !important; }
-    .error-wrapper { 
-        animation: pulse-red 2s infinite; 
-    }
-    @keyframes pulse-red {
-        0% { box-shadow: 0 0 20px rgba(255,0,0,0.2); }
-        50% { box-shadow: 0 0 40px rgba(255,0,0,0.5); }
-        100% { box-shadow: 0 0 20px rgba(255,0,0,0.2); }
-    }
-</style>
 {% endblock %}

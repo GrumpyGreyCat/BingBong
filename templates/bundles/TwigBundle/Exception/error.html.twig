@@ -1,9 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container mt-5 text-center">
-        <h1 class="text-warning">SYSTEM_CRASH_500</h1>
-        <p>The server encountered a logic error. Check your syntax, hacker.</p>
-        <a href="{{ path('home') }}" class="btn btn-warning">REBOOT</a>
+{% block navbar %}{{ parent() }}{% endblock %}
+
+<div class="container directory-container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="matrix-card crash-card text-center p-5">
+
+        <h1 class="display-4 terminal-warning-text fw-bold mb-0">SYSTEM_CRASH_500</h1>
+        <h2 class="matrix-title mt-0 mb-4" style="color: #FFB000;">
+            <span class="matrix-glow">></span> KERNEL_PANIC_DETECTED
+        </h2>
+        
+        <div class="terminal-text-block warning-border mb-4 text-start">
+            <p class="mb-1 text-warning fw-bold">[!] CRITICAL: LOGIC_GATE_FAILURE</p>
+            <p class="mb-1 small">[ ADDR: 0x00500_INTERNAL_SERVER_ERROR ]</p>
+            <p class="mb-1 small">[ DUMP: Stack overflow in main_control_loop ]</p>
+            <p class="matrix-glow small blink">[ STATUS: SYSTEM_HALTED_REBOOT_REQUIRED ]</p>
+        </div>
+
+        <p class="terminal-subtitle mb-5">The server encountered an unexpected logic error. Contact the root admin if this persists.</p>
+
+        <div class="pt-4 border-top-terminal">
+            <a href="{{ path('home') }}" class="matrix-btn warning-btn">
+                [ INITIATE_SYSTEM_REBOOT ]
+            </a>
+        </div>
     </div>
+</div>
 {% endblock %}

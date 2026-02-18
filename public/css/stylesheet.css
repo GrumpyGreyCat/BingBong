@@ -199,8 +199,8 @@ Main Page
 }
 
 .matrix-level-btn.easy { border-color: #00FF41; color: #00FF41; }
-.matrix-level-btn.medium { border-color: #FFB000; color: #FFB000; } /* Amber terminal color */
-.matrix-level-btn.hard { border-color: #FF3E3E; color: #FF3E3E; }   /* Alert Red */
+.matrix-level-btn.medium { border-color: #FFB000; color: #FFB000; }
+.matrix-level-btn.hard { border-color: #FF3E3E; color: #FF3E3E; }  
 
 .matrix-level-btn:hover {
     background: rgba(0, 255, 65, 0.1);
@@ -926,4 +926,107 @@ Room
 .system-status {
     font-family: 'JetBrains Mono', monospace;
     letter-spacing: 1px;
+}
+
+/*
+==============================================================================================
+Error page
+==============================================================================================
+*/
+
+.error-card {
+    max-width: 600px;
+    border: 1px solid #FF3E3E !important; /* Force red border for 404 */
+    box-shadow: 0 0 30px rgba(255, 62, 62, 0.15) !important;
+    animation: glitch-subtle 0.2s infinite alternate;
+}
+
+.terminal-text-block {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-left: 3px solid #FF3E3E;
+}
+
+.matrix-glitch-gif {
+    width: 180px;
+    opacity: 0.4;
+    filter: grayscale(1) sepia(1) hue-rotate(90deg) saturate(10) brightness(0.8);
+}
+
+@keyframes glitch-subtle {
+    0% { transform: translate(0); }
+    100% { transform: translate(1px, 1px); opacity: 0.95; }
+}
+
+body.ctf-body {
+    background-color: var(--matrix-bg) !important;
+}
+
+.forbidden-card {
+    max-width: 650px;
+    border: 2px solid #FF3E3E !important;
+    background: rgba(20, 0, 0, 0.9) !important; /* Very dark red tint */
+    box-shadow: 0 0 40px rgba(255, 62, 62, 0.2) !important;
+    animation: pulse-red-alert 3s infinite ease-in-out;
+}
+
+@keyframes pulse-red-alert {
+    0% { border-color: #660000; box-shadow: 0 0 20px rgba(102, 0, 0, 0.4); }
+    50% { border-color: #FF3E3E; box-shadow: 0 0 50px rgba(255, 62, 62, 0.3); }
+    100% { border-color: #660000; box-shadow: 0 0 20px rgba(102, 0, 0, 0.4); }
+}
+
+
+.forbidden-card .terminal-error-text {
+    color: #FF3E3E !important;
+    text-shadow: 0 0 15px rgba(255, 62, 62, 0.6);
+}
+
+
+.forbidden-card .action-link.modify {
+    border: 1px solid transparent;
+    padding: 10px 20px;
+}
+
+.forbidden-card .action-link.modify:hover {
+    border-color: #FFB000;
+    color: #FFB000;
+}
+
+.terminal-warning-text {
+    color: #FFB000 !important; 
+    text-shadow: 0 0 15px rgba(255, 176, 0, 0.6);
+}
+
+.crash-card {
+    max-width: 700px;
+    border: 2px solid #FFB000 !important;
+    background: rgba(20, 15, 0, 0.95) !important; 
+    box-shadow: 0 0 40px rgba(255, 176, 0, 0.2) !important;
+}
+
+.warning-border {
+    border-left: 3px solid #FFB000 !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.warning-btn {
+    border-color: #FFB000 !important;
+    color: #FFB000 !important;
+}
+
+.warning-btn:hover {
+    background-color: #FFB000 !important;
+    color: #000 !important;
+    box-shadow: 0 0 20px rgba(255, 176, 0, 0.8);
+}
+
+.blink {
+    animation: terminal-blink 1s infinite;
+}
+
+@keyframes terminal-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
